@@ -1,14 +1,15 @@
 interface TextFieldProps{
     className?: string, 
-    onChange: ()=> void,
+    onChange?: (e: any)=> void,
+    onClick?: (e: any) => void,
     type: string,
     value?: string,
     placeholder?: string 
 }
-const TextField = ({className="", onChange, type="text", placeholder, value}: TextFieldProps) => {
+const TextField = ({className="", onChange, type="text", placeholder, value, onClick}: TextFieldProps) => {
   return (
     <>
-    <input className={className} onChange={onChange} type={type} placeholder={placeholder} value={value} />
+    <input className={className} onChange={onChange} type={type} placeholder={placeholder} value={value} onClick={onClick} />
     </>
   )
 }
