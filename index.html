@@ -5,6 +5,32 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React + TS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            spacing: {
+              "8xl": "96rem",
+              "9xl": "128rem",
+              "85": "22.9rem"
+            },
+            borderRadius: {
+              "4xl": "2rem",
+            },
+            width: {
+              "60": "3.75rem",
+              "360": "22.5rem",
+              "880": "55rem"
+            },
+            height: {
+              "60": "3.75rem",
+              "75": "75%"
+            },
+          },
+        },
+      };
+    </script>
   </head>
   <body>
     <div id="root"></div>
