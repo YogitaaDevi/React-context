@@ -8,8 +8,8 @@ const AppRoutes = () => {
     <>
     <Routes>
         <Route element= {<MainLayout />}>
-        <Route index element = {<LoginForm/>} />
-        {/* <Route index element= {<Header/>}/> */}
+        {/* <Route index element = {<LoginForm/>} /> */}
+        <Route index element= {<Header/>}/>
         </Route>
     </Routes>
     </>
