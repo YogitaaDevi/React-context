@@ -1,4 +1,5 @@
 import food from "../../assets/images/food.jpg"
+import { Icons, IconType } from "../../assets/images/Icons"
 const Header = () => {
   return (
     <div className="flex h-20 justify-between items-center bg-stone-500 text-white w-full border">
@@ -11,9 +12,9 @@ const Header = () => {
         </div>
       </div>
       <div className="flex gap-10">
-        <div className="w-12">w</div>
-        <div className="w-12">w</div>
-        <div className="w-12">w</div>
+        <div className="w-12 h-16 flex items-center justify-center"><Icons type={IconType.CartIcon}/></div>
+        <div className="w-12">Profile</div>
+        <div className="w-12">Log</div>
       </div>
     </div>
   )
