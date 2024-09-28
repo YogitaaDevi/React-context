@@ -2,5 +2,6 @@ export interface ProductType {
     id: number,
     name: string,
     image: string,
-    price: number
+    price: number,
+    count:number
 }

@@ -1,6 +1,9 @@
 import food from "../../assets/images/food.jpg"
 import { Icons, IconType } from "../../assets/images/Icons"
+import { useContext } from "react"
+import { ProductContextProvider } from "../../pages/ProductContext"
 const Header = () => {
+  const { count } = useContext(ProductContextProvider)
   return (
     <div className="flex h-20 justify-between items-center bg-stone-500 text-white w-full border">
       <div className="flex items-center justify-center w-56 gap-2">
@@ -11,10 +14,15 @@ const Header = () => {
           Welcome User!!!
         </div>
       </div>
-      <div className="flex gap-10">
-        <div className="w-12 h-16 flex items-center justify-center"><Icons type={IconType.CartIcon}/></div>
-        <div className="w-12">Profile</div>
-        <div className="w-12">Log</div>
+      <div className="flex gap-2">
+        <div className="w-12 flex items-center">Profile</div>
+        <div className="flex flex-col">
+          <div className="ml-3 font-bold">
+          {count}
+          </div>
+          <div className="w-12 -mt-2"><Icons type={IconType.CartIcon} /></div>
+        </div>
+        <div className="w-12 flex items-center mt-2"><Icons type={IconType.LogoutIcon} /></div>
       </div>
     </div>
   )
