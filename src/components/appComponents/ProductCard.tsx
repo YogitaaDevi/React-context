@@ -9,6 +9,7 @@ interface CardProps {
 const Card = ({ product }: CardProps) => {
 
   const { handleIncrement, handleDecrement } = useContext(ProductContextProvider)
+  
   return (
     <div className="w-64 h-76 border shadow-xl flex flex-col gap-3" key={product.id}>
       <div className="h-36 flex items-center justify-center">

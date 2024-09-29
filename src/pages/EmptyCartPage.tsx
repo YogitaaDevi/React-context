@@ -1,5 +1,7 @@
 import oopsImage from "../assets/images/oops.jpg"
+
 const EmptyCartPage = () => {
+    
   return (
     <div className="text-2xl font-bold">
         <img src={oopsImage} alt="" />

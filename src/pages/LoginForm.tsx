@@ -1,43 +1,55 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import TextField from "../components/commonComponents/TextField"
 import Button from "../components/commonComponents/Button";
 import { useNavigate } from "react-router-dom";
+import { AuthContextProvider } from "./AuthContext";
+import { users } from "../data/Users";
+
 const LoginForm = () => {
+
   const [name, setName] = useState<string>("")
   const [nameError, setNameError] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("")
   const [passowrdError, setPasswordError] = useState<string>("")
   const navigate = useNavigate();
+  const { handleLogin } = useContext(AuthContextProvider)
 
   const handleSubmit = () => {
+    let user = users.find((data) => data.name === name && data.password === password)
     if (name === "" && password === "") {
       setNameError("Username is required*")
       setPasswordError("Password is required*")
-  }
-  else if (name === "") {
+    }
+    else if (name === "") {
       setNameError("Username is required*")
       setPasswordError("")
-  }
-  else if (name === "null") {
+    }
+    else if (name === "null") {
       setNameError("Provide valid username*")
       setPasswordError("")
-  }
-  else if (password === "") {
+    }
+    else if (password === "") {
       setPasswordError("Password is required*")
       setNameError("")
-  }
-  else if (password.length < 6 || password.length > 8) {
+    }
+    else if (password.length < 6 || password.length > 8) {
       setPasswordError("Password must be 6 to 8 characters*")
       setNameError("")
-  }
-  else {
+    }
+    else if (!user) {
+      setNameError("Username is incorrect*");
+      setPasswordError("Password is incorrect*");
+    }
+    else {
       setNameError("")
       setPasswordError("")
+      handleLogin()
       navigate("/home")
-  }
+    }
 
   }
+  
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center">
       <div className="w-1/3 h-3/4 border flex flex-col gap-10 shadow-xl rounded-lg">

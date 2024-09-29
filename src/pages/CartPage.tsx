@@ -4,6 +4,7 @@ import CartCard from '../components/appComponents/CartCard'
 import EmptyCartPage from './EmptyCartPage'
 
 const CartPage = () => {
+  
   const { cart } = useContext(ProductContextProvider)
   const [totalCost, setTotalCost] = useState<number>(0)
 
