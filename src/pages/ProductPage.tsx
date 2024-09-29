@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import Card from '../components/appComponents/Card'
+import Card from '../components/appComponents/ProductCard'
 import { ProductContextProvider } from './ProductContext'
 
 const ProductPage = () => {
