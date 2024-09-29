@@ -8,9 +8,9 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <div className="flex h-20 justify-between items-center bg-stone-500 text-white w-full border">
-      <div className="flex items-center justify-center w-56 gap-2">
+      <div className="flex items-center justify-center w-64 gap-2">
         <div className="h-12">
-          <img src={food} alt="" className="h-14 w-14 rounded-full" />
+          <Icons type={IconType.FoodServingIcon} />
         </div>
         <div className="text-xl font-bold">
           Welcome User!!!
