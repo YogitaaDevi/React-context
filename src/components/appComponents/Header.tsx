@@ -12,12 +12,11 @@ const Header = () => {
         <div className="h-12">
           <img src={food} alt="" className="h-14 w-14 rounded-full" />
         </div>
-        <div className="text-xl">
+        <div className="text-xl font-bold">
           Welcome User!!!
         </div>
       </div>
       <div className="flex gap-2">
-        <div className="w-12 flex items-center">Profile</div>
         <div className="flex flex-col">
           <div className="ml-3 font-bold">
           {count}

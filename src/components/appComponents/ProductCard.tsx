@@ -16,7 +16,7 @@ const Card = ({product}: CardProps) => {
     </div>
     <div className="flex flex-col items-center justify-center gap-2">
       <div className="text-2xl font-bold">{product.name}</div>
-      <div className="text-lg">₹{product.price}</div>
+      <div className="text-lg">Rs.{product.price}</div>
     </div>
     <div className="flex items-center justify-center gap-5">
         <Button className='h-10 w-12 flex items-center' name='-' onClick={() => handleDecrement(product)} />
