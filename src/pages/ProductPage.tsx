@@ -6,7 +6,7 @@ const ProductPage = () => {
   const {product} = useContext(ProductContextProvider)
   return (
     <>
-      <div className='flex flex-wrap w-5/6 gap-5 items-center p-5'>
+      <div className='flex flex-wrap w-full gap-5 items-center justify-center'>
         {product.map((product) => <Card product={product}/> )}
       </div>
     </>

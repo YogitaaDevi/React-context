@@ -53,7 +53,6 @@ const ProductContext = ({ children }: ProductContextProps) => {
       }
     }
   }
-  console.log(cart)
   return (
     <ProductContextProvider.Provider value={{ count, handleIncrement, handleDecrement, product, cart }}>
       {children}

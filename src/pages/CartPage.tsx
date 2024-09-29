@@ -22,7 +22,7 @@ const CartPage = () => {
   return (
     <div className="flex flex-col items-center mt-10 w-full">
       <div className="text-2xl font-bold">
-        Your Card is filled with:
+        Your Cart is filled with:
       </div>
       {cart.length === 0 ? <EmptyCartPage /> :
         <div className="w-1/2 border bg-white flex flex-col items-center mt-10">

@@ -2,7 +2,7 @@ import food from "../../assets/images/food.jpg"
 import { Icons, IconType } from "../../assets/images/Icons"
 import { useContext } from "react"
 import { ProductContextProvider } from "../../pages/ProductContext"
-import { useNavigate } from "react-router-dom"
+import { replace, useNavigate } from "react-router-dom"
 const Header = () => {
   const { count } = useContext(ProductContextProvider)
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Header = () => {
           </div>
           <div className="w-12 -mt-2" onClick={() => navigate("/cart")}><Icons type={IconType.CartIcon} /></div>
         </div>
-        <div className="w-12 flex items-center mt-2"><Icons type={IconType.LogoutIcon} /></div>
+        <div className="w-12 flex items-center mt-2" onClick={() => navigate("/login", {replace: true}) }><Icons type={IconType.LogoutIcon} /></div>
       </div>
     </div>
   )

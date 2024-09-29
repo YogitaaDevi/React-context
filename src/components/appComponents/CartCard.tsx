@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { ProductType } from '../../types/ProductType'
 
 interface CartCardProps {
