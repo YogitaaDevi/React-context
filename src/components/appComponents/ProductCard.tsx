@@ -12,7 +12,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const [isAdd, setIsAdd] = useState<boolean>(false);
 
   return (
-    <div className="w-64 h-96 border shadow flex flex-col gap-3" key={product.id}>
+    <div className="w-64 h-96 border shadow flex flex-col gap-3 bg-gray-100" key={product.id}>
       <div className="h-48 flex items-center justify-center">
         <img src={product.image} alt="userImage" className="h-40 w-40" />
       </div>

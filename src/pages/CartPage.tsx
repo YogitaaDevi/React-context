@@ -7,21 +7,8 @@ import { useNavigate } from 'react-router-dom'
 
 const CartPage = () => {
   
-  const { cart } = useContext(ProductContextProvider)
-  const [totalCost, setTotalCost] = useState<number>(0)
+  const { cart, totalCost } = useContext(ProductContextProvider)
   const navigate = useNavigate();
-
-  const handleTotalCount = (itemCost: number) => {
-    setTotalCost((prevTotal) => prevTotal + itemCost);
-  };
-
-  useEffect(() => {
-    setTotalCost(0);
-    cart.forEach(item => {
-      handleTotalCount(item.price * item.count);
-    });
-  }, [cart]);
-
 
   return (
     <div className="flex flex-col items-center mt-10 w-full">

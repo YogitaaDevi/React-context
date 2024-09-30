@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import { ProductType } from "../types/ProductType";
 import products from "../data/Products";
 
@@ -11,7 +11,8 @@ const ProductContextValue = {
   product: [{ id: 0, name: "", price: 0, image: "", count: 0 }],
   cart: [{ id: 0, name: "", price: 0, image: "", count: 0 }],
   handleIncrement: (product: ProductType) => { },
-  handleDecrement: (product: ProductType) => { }
+  handleDecrement: (product: ProductType) => { },
+  totalCost: 0
 }
 
 export const ProductContextProvider = createContext(ProductContextValue);
@@ -21,9 +22,20 @@ const ProductContext = ({ children }: ProductContextProps) => {
   const [product, setProduct] = useState<ProductType[]>(products)
   const [cart, setCart] = useState<ProductType[]>([])
   const [count, setCount] = useState<number>(0);
-
+  const [totalCost, setTotalCost] = useState<number>(0)
   let productFilter: any;
   let cartProduct: any;
+
+  const handleTotalCount = (itemCost: number) => {
+    setTotalCost((prevTotal) => prevTotal + itemCost);
+  };
+
+  useEffect(() => {
+    setTotalCost(0);
+    cart.forEach(item => {
+      handleTotalCount(item.price * item.count);
+    });
+  });
 
   const findProduct = (id: number) => {
     return products.find((data) => data.id === id)
@@ -62,7 +74,7 @@ const ProductContext = ({ children }: ProductContextProps) => {
     }
   }
   return (
-    <ProductContextProvider.Provider value={{ count, handleIncrement, handleDecrement, product, cart }}>
+    <ProductContextProvider.Provider value={{ count, handleIncrement, handleDecrement, product, cart, totalCost }}>
       {children}
     </ProductContextProvider.Provider>
   )
