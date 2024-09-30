@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ProductType } from '../../types/ProductType'
 import Button from '../commonComponents/Button'
-import { ProductContextProvider } from '../../pages/ProductContext'
+import { ProductContextProvider } from '../../context/ProductContext'
 
 interface CardProps {
   product: ProductType
@@ -22,9 +22,9 @@ const Card = ({ product }: CardProps) => {
         </div>
       </div>
       <div className="flex items-center justify-center gap-5">
-        <Button className='h-10 w-12 flex items-center justify-center bg-red-500 rounded text-white' name='-' onClick={() => handleDecrement(product)} />
+        <Button className='h-10 w-12 flex items-center justify-center bg-red-500 rounded text-white hover:bg-red-700' name='-' onClick={() => handleDecrement(product)} />
         {product.count}
-        <Button className='h-10 w-12 flex items-center justify-center bg-green-500 rounded text-white' name='+' onClick={() => handleIncrement(product)} />
+        <Button className='h-10 w-12 flex items-center justify-center bg-green-500 rounded text-white hover:bg-green-700' name='+' onClick={() => handleIncrement(product)} />
       </div>
     </div>
   )

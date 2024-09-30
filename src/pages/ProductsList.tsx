@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import Card from '../components/appComponents/ProductCard'
-import { ProductContextProvider } from './ProductContext'
+import { ProductContextProvider } from '../context/ProductContext'
 
-const ProductPage = () => {
+const ProductsList = () => {
 
   const { product } = useContext(ProductContextProvider)
 
@@ -15,4 +15,4 @@ const ProductPage = () => {
   )
 }
 
-export default ProductPage
+export default ProductsList

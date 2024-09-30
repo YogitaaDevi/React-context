@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { ProductContextProvider } from './ProductContext'
+import { ProductContextProvider } from '../context/ProductContext'
 import CartCard from '../components/appComponents/CartCard'
 import EmptyCartPage from './EmptyCartPage'
 import Button from '../components/commonComponents/Button'
@@ -31,7 +31,7 @@ const CartPage = () => {
       {cart.length === 0 ? <EmptyCartPage /> :
         <div className="bg-white flex flex-col items-center mt-10">
           {cart.map((item) => <CartCard item={item} />)}
-          <div className="text-lg mt-10 font-bold">Total Price including GST is: {totalCost}</div>
+          <div className="text-xl mt-10 font-bold">Total Price including GST is: {totalCost}</div>
         </div>
       }
       <div className="mt-10">

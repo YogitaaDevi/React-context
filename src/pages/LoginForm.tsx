@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import TextField from "../components/commonComponents/TextField"
 import Button from "../components/commonComponents/Button";
 import { useNavigate } from "react-router-dom";
-import { AuthContextProvider } from "./AuthContext";
+import { AuthContextProvider } from "../context/AuthContext";
 import { users } from "../data/Users";
 
 const LoginForm = () => {
@@ -38,13 +38,13 @@ const LoginForm = () => {
       setNameError("")
     }
     else if (!user) {
-      setNameError("Username is incorrect*");
-      setPasswordError("Password is incorrect*");
+      setNameError("");
+      setPasswordError("Username or Password is incorrect*");
     }
     else {
       setNameError("")
       setPasswordError("")
-      handleLogin()
+      handleLogin(name)
       navigate("/home")
     }
 
@@ -52,7 +52,7 @@ const LoginForm = () => {
   
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center">
-      <div className="w-1/3 h-3/4 border flex flex-col gap-10 shadow-xl rounded-lg">
+      <div className="w-98 border flex flex-col gap-5 shadow rounded-lg">
         <div className="text-2xl font-bold flex h-20 items-center justify-center">Login Form</div>
         <div className="h-full flex flex-col items-center">
           <div className="mb-8">
@@ -70,7 +70,7 @@ const LoginForm = () => {
             </div>
             <a href="">Forget Password?</a>
           </div>
-          <Button className="mt-10 w-48 bg-stone-500 text-white h-12 rounded text-lg hover:bg-stone-700" name="Login" onClick={handleSubmit} />
+          <Button className="mt-10 w-44 bg-slate-700 font-bold text-white h-12 rounded text-lg hover:bg-slate-500" name="Login" onClick={handleSubmit} />
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 import ProductName from './ProductName'
-import ProductPage from './ProductPage'
+import ProductsList from './ProductsList'
 
 const ProductDisplayPage = () => {
   return (
     <>
     <div className="flex flex-col gap-2 items-center">
     <ProductName/>
-    <ProductPage/>
+    <ProductsList/>
     </div>
     </>
   )

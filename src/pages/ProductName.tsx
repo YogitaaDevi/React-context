@@ -4,9 +4,9 @@ const ProductName = () => {
     <>
       <div className='flex w-5/6 gap-1 flex-col justify-center items-center h-24'>
         <div className='flex gap-3 items-center'>
-          <img src={chef} className="h-12 w-12" />
-          <div className="text-2xl font-bold">
-            Hana's Kitchen
+          <img src={chef} className="h-20 w-20" />
+          <div className="text-5xl font-bold">
+            HaNa's Kitchen
             <div className="text-lg">
               A Multi Cuisine Restaurent
             </div>

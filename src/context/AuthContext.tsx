@@ -5,7 +5,8 @@ interface AuthContextProps {
 
 const AuthContextValue = {
   isAuthenticated: false,
-  handleLogin: () => { },
+  userName: "",
+  handleLogin: (name: string) => { },
   handleLogout: () => { }
 }
 
@@ -14,15 +15,17 @@ export const AuthContextProvider = createContext(AuthContextValue)
 const AuthContext = ({ children }: AuthContextProps) => {
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>("");
   
-  const handleLogin = () => {
+  const handleLogin = (name:string) => {
     setIsAuthenticated(true)
+    setUserName(name)
   }
   const handleLogout = () => {
     setIsAuthenticated(false)
   }
   return (
-    <AuthContextProvider.Provider value={{ isAuthenticated, handleLogin, handleLogout }}>
+    <AuthContextProvider.Provider value={{ isAuthenticated, handleLogin, handleLogout, userName }}>
       {children}
     </AuthContextProvider.Provider>
   )
