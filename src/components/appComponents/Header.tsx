@@ -34,12 +34,12 @@ const Header = () => {
           {greeting} {userName} !!!
         </div>
       </div>
-      <div className="flex gap-2">
-        <div className="flex flex-col">
-          <div className="ml-3 font-bold">
+      <div className="flex gap-8">
+        <div className="flex flex-col gap-1 items-center">
+          <div className="w-4 h-4 rounded-full bg-red-500 flex justify-center items-center text-sm">
             {count}
           </div>
-          <div className="w-12 -mt-2" onClick={() => navigate("/home/cart")}><Icons type={IconType.CartIcon} /></div>
+          <div className="-mt-2" onClick={() => navigate("/home/cart")}><Icons type={IconType.CartIcon} /></div>
         </div>
         <div className="w-12 flex items-center mt-2" onClick={handleLogout}><Icons type={IconType.LogoutIcon} /></div>
       </div>

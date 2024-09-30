@@ -17,7 +17,7 @@ const ProductContextValue = {
 export const ProductContextProvider = createContext(ProductContextValue);
 
 const ProductContext = ({ children }: ProductContextProps) => {
-  
+
   const [product, setProduct] = useState<ProductType[]>(products)
   const [cart, setCart] = useState<ProductType[]>([])
   const [count, setCount] = useState<number>(0);
@@ -37,9 +37,10 @@ const ProductContext = ({ children }: ProductContextProps) => {
     productFilter = findProduct(product.id)
     if (productFilter) {
       productFilter.count += 1
-      setCount((prev: number) => prev + 1)
+      setProduct((prev: ProductType[]) => [...prev, productFilter])
       cartProduct = findCartProduct(cart)
       if (!cartProduct) {
+        setCount((prev: number) => prev + 1)
         setCart((prev: any) => [...prev, productFilter])
       }
     }
@@ -48,9 +49,10 @@ const ProductContext = ({ children }: ProductContextProps) => {
     productFilter = findProduct(product.id)
     if (productFilter && productFilter.count > 0) {
       productFilter.count -= 1
-      setCount((prev: number) => prev - 1)
+      setProduct((prev: ProductType[]) => [...prev, productFilter])
       cartProduct = findCartProduct(cart)
       if (cartProduct && productFilter.count === 0) {
+        setCount((prev: number) => prev - 1)
         setCart((prev) => prev.filter((item) => item.id !== product.id))
       }
     }
