@@ -33,11 +33,15 @@ const ProductContext = ({ children }: ProductContextProps) => {
     return cart.find((data) => data.id === productFilter.id)
   }
 
+  const handleProduct = (product: ProductType) => {
+    setProduct((prev: ProductType[]) => prev.map((data) => data.id === product.id ? product : data ) )
+  }
+
   const handleIncrement = (product: ProductType) => {
     productFilter = findProduct(product.id)
     if (productFilter) {
       productFilter.count += 1
-      setProduct((prev: ProductType[]) => [...prev, productFilter])
+      handleProduct(productFilter)
       cartProduct = findCartProduct(cart)
       if (!cartProduct) {
         setCount((prev: number) => prev + 1)
@@ -49,7 +53,7 @@ const ProductContext = ({ children }: ProductContextProps) => {
     productFilter = findProduct(product.id)
     if (productFilter && productFilter.count > 0) {
       productFilter.count -= 1
-      setProduct((prev: ProductType[]) => [...prev, productFilter])
+      handleProduct(productFilter)
       cartProduct = findCartProduct(cart)
       if (cartProduct && productFilter.count === 0) {
         setCount((prev: number) => prev - 1)

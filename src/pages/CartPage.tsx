@@ -30,12 +30,12 @@ const CartPage = () => {
       </div>
       {cart.length === 0 ? <EmptyCartPage /> :
         <div className="bg-white flex flex-col items-center mt-10">
-          {cart.map((item) => <CartCard item={item} />)}
+          {cart.map((item) => <CartCard item={item} key={item.id} />)}
           <div className="text-xl mt-10 font-bold">Total Price including GST is: {totalCost}</div>
         </div>
       }
       <div className="mt-10">
-        <Button className='bg-green-500 text-white w-24 h-12 rounded hover:bg-green-700' name='Back' onClick={()=> navigate(-1)}/>
+        <Button className='bg-green-500 text-white w-24 h-12 rounded hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300' name='Back' onClick={()=> navigate(-1)}/>
       </div>
     </div>
   )
