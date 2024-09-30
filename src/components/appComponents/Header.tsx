@@ -10,8 +10,7 @@ const Header = () => {
   const { handleLogout, userName } = useContext(AuthContextProvider)
   const navigate = useNavigate();
   const [greeting, setGreeting] = useState<string>("");
-  let now = new Date();
-  let hours = now.getHours();
+  let hours = new Date().getHours();
 
   useEffect(() => {
     if(hours >= 4 && hours < 12) 
@@ -22,7 +21,7 @@ const Header = () => {
       setGreeting("Good evening -")
     else
       setGreeting("Night Carvings? -")
-    }, [now, hours])
+    }, [hours])
 
   return (
     <div className="flex h-20 justify-between items-center bg-slate-500 text-white w-full border">
