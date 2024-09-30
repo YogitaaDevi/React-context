@@ -2,12 +2,15 @@ import { useContext, useEffect, useState } from 'react'
 import { ProductContextProvider } from './ProductContext'
 import CartCard from '../components/appComponents/CartCard'
 import EmptyCartPage from './EmptyCartPage'
+import Button from '../components/commonComponents/Button'
+import { useNavigate } from 'react-router-dom'
 
 const CartPage = () => {
   
   const { cart } = useContext(ProductContextProvider)
   const [totalCost, setTotalCost] = useState<number>(0)
-
+  const navigate = useNavigate();
+  
   const handleTotalCount = (itemCost: number) => {
     setTotalCost((prevTotal) => prevTotal + itemCost);
   };
@@ -31,6 +34,9 @@ const CartPage = () => {
           <div className="text-lg mt-10 font-bold">Total Price including GST is: {totalCost}</div>
         </div>
       }
+      <div className="mt-10">
+        <Button className='bg-green-500 text-white w-24' name='Back' onClick={()=> navigate(-1)}/>
+      </div>
     </div>
   )
 }
