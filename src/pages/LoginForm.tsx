@@ -45,7 +45,7 @@ const LoginForm = () => {
       setNameError("")
       setPasswordError("")
       handleLogin(name)
-      navigate("/home")
+      navigate("/home", {replace: true})
     }
 
   }
