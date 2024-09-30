@@ -6,6 +6,7 @@ import AppLayout from '../layouts/AppLayout'
 import ProductDisplayPage from '../pages/ProductDisplayPage'
 import CartPage from '../pages/CartPage'
 import PrivateRoute from './PrivateRoute'
+import HomePage from '../pages/HomePage'
 
 const AppRoutes = () => {
 
@@ -16,7 +17,8 @@ const AppRoutes = () => {
         <Route index element={<Navigate to="/login" replace />} />
         <Route element={<PrivateRoute />}>
           <Route element={<AppLayout />}>
-            <Route path='/home' element={<ProductDisplayPage />} />
+            <Route path='/home' element={<HomePage />} />
+            <Route path='/home/product' element={<ProductDisplayPage />} />
             <Route path='/home/cart' element={<CartPage />} />
           </Route>
         </Route>

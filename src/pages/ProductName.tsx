@@ -8,7 +8,7 @@ const ProductName = () => {
           <div className="text-5xl font-bold">
             KaLa's Kitchen
             <div className="text-lg">
-              A Multi Cuisine Restaurent
+              An Indian Cuisine Restaurent
             </div>
           </div>
         </div>
