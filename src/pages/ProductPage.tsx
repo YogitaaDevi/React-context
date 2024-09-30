@@ -4,12 +4,12 @@ import { ProductContextProvider } from './ProductContext'
 
 const ProductPage = () => {
 
-  const {product} = useContext(ProductContextProvider)
-  
+  const { product } = useContext(ProductContextProvider)
+
   return (
     <>
       <div className='flex flex-wrap w-full gap-5 items-center justify-center'>
-        {product.map((product) => <Card product={product}/> )}
+        {product.map((product) => <Card product={product} />)}
       </div>
     </>
   )

@@ -17,9 +17,11 @@ const ProductContextValue = {
 export const ProductContextProvider = createContext(ProductContextValue);
 
 const ProductContext = ({ children }: ProductContextProps) => {
+  
   const [product, setProduct] = useState<ProductType[]>(products)
   const [cart, setCart] = useState<ProductType[]>([])
   const [count, setCount] = useState<number>(0);
+
   let productFilter: any;
   let cartProduct: any;
 
