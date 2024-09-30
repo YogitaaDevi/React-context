@@ -11,9 +11,9 @@ const CartCard = ({ item }: CartCardProps) => {
   }
 
   return (
-    <div className="w-full flex h-20 border" key={item.id}>
+    <div className="w-full flex h-20 border-b" key={item.id}>
       <div className="w-28 h-20 flex items-center justify-center">
-        <img src={item.image} alt="userImage" className="h-16" />
+        <img src={item.image} alt="userImage" className="h-16 w-20" />
       </div>
       <div className="w-56 h-20 flex flex-col font-bold justify-center items-center">
         <div className="text-xl">{item.name}</div>

@@ -8,7 +8,7 @@ const ProductName = () => {
           <div className="text-2xl font-bold">
             Hana's Kitchen
             <div className="text-lg">
-              100% Pure Veg Restaurent
+              A Multi Cuisine Restaurent
             </div>
           </div>
         </div>

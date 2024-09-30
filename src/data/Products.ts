@@ -9,10 +9,10 @@ import dosa from "../assets/images/dosa.jfif"
 import pongal from "../assets/images/pongal.jpg"
 
 const products: ProductType[] = [
-    { id: 1, image: idly, name: "Idly", price: 60, count:0 },
-    { id: 2, image: poori, name: "Poori", price: 80, count:0 },
-    { id: 3, image: dosa, name: "Dosa", price: 100, count:0 },
-    { id: 4, image: pongal, name: "Pongal", price: 60, count:0 },
+    { id: 1, image: idly, name: "Idly with Chutney", price: 60, count:0 },
+    { id: 2, image: poori, name: "Poori Kezhangu", price: 80, count:0 },
+    { id: 3, image: dosa, name: "Dosa with Sambar", price: 100, count:0 },
+    { id: 4, image: pongal, name: "Ghee Pongal", price: 60, count:0 },
     { id: 5, image: briyani1, name: "Mutton Briyani", price: 280, count: 0 },
     { id: 6, image: briyani2, name: "Chicken Briyani", price: 250, count:0 },
     { id: 7, image: chicken, name: "Chicken 65", price: 150, count:0 },

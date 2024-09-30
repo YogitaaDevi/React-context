@@ -10,7 +10,7 @@ const CartPage = () => {
   const { cart } = useContext(ProductContextProvider)
   const [totalCost, setTotalCost] = useState<number>(0)
   const navigate = useNavigate();
-  
+
   const handleTotalCount = (itemCost: number) => {
     setTotalCost((prevTotal) => prevTotal + itemCost);
   };
@@ -29,13 +29,13 @@ const CartPage = () => {
         Your Cart is filled with:
       </div>
       {cart.length === 0 ? <EmptyCartPage /> :
-        <div className="w-1/2 border bg-white flex flex-col items-center mt-10">
+        <div className="bg-white flex flex-col items-center mt-10">
           {cart.map((item) => <CartCard item={item} />)}
           <div className="text-lg mt-10 font-bold">Total Price including GST is: {totalCost}</div>
         </div>
       }
       <div className="mt-10">
-        <Button className='bg-green-500 text-white w-24' name='Back' onClick={()=> navigate(-1)}/>
+        <Button className='bg-green-500 text-white w-24 h-12 rounded hover:bg-green-700' name='Back' onClick={()=> navigate(-1)}/>
       </div>
     </div>
   )

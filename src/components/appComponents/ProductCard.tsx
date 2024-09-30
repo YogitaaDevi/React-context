@@ -9,21 +9,23 @@ interface CardProps {
 const Card = ({ product }: CardProps) => {
 
   const { handleIncrement, handleDecrement } = useContext(ProductContextProvider)
-  
+
   return (
-    <div className="w-64 h-76 border shadow-xl flex flex-col gap-3" key={product.id}>
+    <div className="w-64 h-76 border shadow flex flex-col gap-3" key={product.id}>
       <div className="h-36 flex items-center justify-center">
         <img src={product.image} alt="userImage" className="h-32 w-32 rounded-full" />
       </div>
       <div className="flex flex-col items-center justify-center gap-1">
         <div className="text-xl font-bold">{product.name}</div>
-        Rs.{product.price}
+        <div className='text-lg'>
+          Rs.{product.price}
+        </div>
       </div>
       <div className="flex items-center justify-center gap-5">
-          <Button className='h-10 w-12 flex items-center' name='-' onClick={() => handleDecrement(product)} />
-          {product.count}
-          <Button className='h-10 w-12 flex items-center' name='+' onClick={() => handleIncrement(product)} />
-        </div>
+        <Button className='h-10 w-12 flex items-center justify-center bg-red-500 rounded text-white' name='-' onClick={() => handleDecrement(product)} />
+        {product.count}
+        <Button className='h-10 w-12 flex items-center justify-center bg-green-500 rounded text-white' name='+' onClick={() => handleIncrement(product)} />
+      </div>
     </div>
   )
 }
