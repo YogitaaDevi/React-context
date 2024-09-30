@@ -36,7 +36,7 @@ const Header = () => {
       </div>
       <div className="flex gap-8">
         <div className="flex flex-col gap-1 items-center">
-          <div className="w-4 h-4 rounded-full bg-red-500 flex justify-center items-center text-sm">
+          <div className="ml-1 w-4 h-4 rounded-full bg-red-500 flex justify-center items-center text-sm">
             {count}
           </div>
           <div className="-mt-2" onClick={() => navigate("/home/cart")}><Icons type={IconType.CartIcon} /></div>

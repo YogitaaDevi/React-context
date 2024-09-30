@@ -15,8 +15,8 @@ const CartCard = ({ item }: CartCardProps) => {
   }
 
   return (
-    <div className="w-full flex gap-5 h-24 border-b">
-      <div className="w-28 flex items-center justify-center">
+    <div className="w-full flex items-center gap-5 h-24 border-b">
+      <div className="w-28 flex justify-center">
         <img src={item.image} alt="userImage" className="h-20 w-24" />
       </div>
       <div className="w-56 flex flex-col font-bold justify-center items-center">
