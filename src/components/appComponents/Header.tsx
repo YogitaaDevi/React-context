@@ -25,7 +25,7 @@ const Header = () => {
           <div className="ml-3 font-bold">
           {count}
           </div>
-          <div className="w-12 -mt-2" onClick={() => navigate("/cart")}><Icons type={IconType.CartIcon} /></div>
+          <div className="w-12 -mt-2" onClick={() => navigate("/home/cart")}><Icons type={IconType.CartIcon} /></div>
         </div>
         <div className="w-12 flex items-center mt-2" onClick={handleLogout}><Icons type={IconType.LogoutIcon} /></div>
       </div>
