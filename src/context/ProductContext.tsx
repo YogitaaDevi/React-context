@@ -16,7 +16,7 @@ const ProductContextValue = {
   showOrderButton: () => { },
   hideOrderButton: () => { },
   isOrder: false,
-  paymentSuccess: () => { }, 
+  paymentSuccess: () => { },
   isPayment: false
 }
 
@@ -28,6 +28,7 @@ const ProductContext = ({ children }: ProductContextProps) => {
   const [cart, setCart] = useState<ProductType[]>([])
   const [count, setCount] = useState<number>(0);
   const [totalCost, setTotalCost] = useState<number>(0)
+  const [gst, setGst] = useState<number>(0)
   const [isOrder, setIsOrder] = useState<boolean>(false);
   const [isPayment, setIsPayment] = useState<boolean>(false);
 
@@ -35,12 +36,14 @@ const ProductContext = ({ children }: ProductContextProps) => {
   let cartProduct: any;
 
   const handleTotalCount = (itemCost: number) => {
-    setTotalCost((prevTotal) => prevTotal + itemCost);
+    setTotalCost((prevTotal) => prevTotal + itemCost + gst);
   };
 
   useEffect(() => {
     setTotalCost(0);
+    setGst(0);
     cart.forEach(item => {
+      setGst(item.price * 0.18)
       handleTotalCount(item.price * item.count);
     });
   });
@@ -61,11 +64,11 @@ const ProductContext = ({ children }: ProductContextProps) => {
     setIsOrder(false)
   }
   const paymentSuccess = () => {
-    setIsPayment((prev:boolean) => !prev)
+    setIsPayment((prev: boolean) => !prev)
   }
 
   const handleProduct = (product: ProductType) => {
-    setProduct((prev: ProductType[]) => prev.map((data) => data.id === product.id ? product : data ) )
+    setProduct((prev: ProductType[]) => prev.map((data) => data.id === product.id ? product : data))
   }
 
   const handleIncrement = (product: ProductType) => {
@@ -93,7 +96,7 @@ const ProductContext = ({ children }: ProductContextProps) => {
     }
   }
   return (
-    <ProductContextProvider.Provider value={{ count, handleIncrement, handleDecrement, product, cart, totalCost, hideOrderButton, showOrderButton , isOrder, paymentSuccess, isPayment }}>
+    <ProductContextProvider.Provider value={{ count, handleIncrement, handleDecrement, product, cart, totalCost, hideOrderButton, showOrderButton, isOrder, paymentSuccess, isPayment }}>
       {children}
     </ProductContextProvider.Provider>
   )
