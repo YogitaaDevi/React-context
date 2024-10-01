@@ -1,47 +1,64 @@
-import { useContext } from "react"
-import { AuthContextProvider } from "../context/AuthContext"
-import smiley from "../assets/images/smiley.png"
-import servingChef from "../assets/images/serving-chef.jfif"
-import Button from "../components/commonComponents/Button"
-import CartPage from "./CartPage"
-import { ProductContextProvider } from "../context/ProductContext"
-import EmptyPage from "./EmptyPage"
-import { useNavigate } from "react-router-dom"
+import { useContext } from 'react'
+import Button from '../components/commonComponents/Button'
+import { useNavigate } from 'react-router-dom'
+import { AuthContextProvider } from '../context/AuthContext'
 
 const ProfilePage = () => {
-  const { user } = useContext(AuthContextProvider)
-  const { isPayment } = useContext(ProductContextProvider)
   const navigate = useNavigate()
+  const { user } = useContext(AuthContextProvider)
+
   return (
-    <div className='w-full flex flex-col items-center'>
-      <div className="w-150 h-96 flex">
-        <div className='w-full flex flex-col items-center gap-4 font-bold'>
-          <div className="text-5xl w-full text-center">
-            Dear {user?.name}
+    <>
+      <div className='w-full flex flex-col items-center pt-5 gap-6'>
+        <div className="w-3/6 h-96 border-2 flex flex-col items-center gap-4 bg-slate-200 rounded">
+          <div className='flex flex-col gap-5 items-center'>
+            <div className='text-5xl font-bold'>Welcome to your Profile</div>
+            <img src={user.image} className='w-32 h-32 rounded-full' />
           </div>
-          <div className='w-full flex justify-center gap-1 items-center text-2xl'>
-            Thank you for choosing our Kitchen
-            <img src={smiley} alt="" className="w-6 h-6" />
-          </div>
-          {isPayment ?
-            <div className="flex flex-col w-full gap-5 border-2">
-              <div className="flex">
-                <div className="flex gap-2 text-xl">
-                  <img src={servingChef} alt="" className="h-84 w-84" />
-                </div>
-                <div className="flex justify-center w-full">
-                  <CartPage />
-                </div>
+          <div className="flex flex-col">
+            <div className='w-64 h-8 flex'>
+              <div className='w-36 font-bold text-xl'>
+                Username:
+              </div>
+              <div className='text-lg'>
+                {user.name}
               </div>
             </div>
-            : <EmptyPage />
-          }
-          <div className="">
-            <Button className='bg-red-500 text-white w-36 h-10 rounded hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300' name='Back' onClick={() => navigate("/home/product")} />
+            <div className='w-64 h-8 flex'>
+              <div className='w-36 font-bold text-xl'>
+                Password:
+              </div>
+              <div className='text-lg'>
+                {user.password}
+              </div>
+            </div>
+            <div className='w-64 h-8 flex'>
+              <div className='w-36 font-bold text-xl'>
+                Contact:
+              </div>
+              <div className='text-lg'>
+                {user.contact}
+              </div>
+            </div>
+            <div className='w-64 h-8 flex'>
+              <div className='w-36 font-bold text-xl'>
+                Location:
+              </div>
+              <div className='text-lg'>
+                {user.location}
+              </div>
+            </div>
+          </div>
+          <div className="text-lg font-bold">
+            If you face any issues, contact: kalakitchen@gmail.com
           </div>
         </div>
+        <div className='w-64 h-8 flex justify-center gap-5'>
+          <Button className='w-36 h-10 rounded bg-slate-700 text-white' name='Your Orders' onClick={() => navigate("/home/user/order")} />
+          <Button className='w-28 h-10 rounded bg-red-500 text-white' name='Back' onClick={() => navigate(-1)} />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

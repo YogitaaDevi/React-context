@@ -1,4 +1,4 @@
-import { Icons, IconType } from "../../assets/images/Icons"
+import { Icons, IconType } from "../commonComponents/Icons"
 import { useContext, useEffect, useState } from "react"
 import { ProductContextProvider } from "../../context/ProductContext"
 import { useNavigate } from "react-router-dom"
@@ -23,8 +23,8 @@ const Header = () => {
       setGreeting("Night Carvings? -")
     }, [hours])
 
-    const handleProfile = () => {
-      navigate("/home/profile")
+    const handleUser = () => {
+      navigate("/home/user")
       hideOrderButton()
     }
 
@@ -48,15 +48,18 @@ const Header = () => {
           {greeting} {user.name} !!!
         </div>
       </div>
-      <div className="flex gap-8">
-        <div className="mt-2" onClick={handleProfile} ><Icons type={IconType.ProfileIcon}/></div>
+      <div className="flex gap-8 h-12">
+        <div className="flex items-center">
+        <img src={user.image} alt="" className="w-10 h-10 rounded-full" onClick={handleUser}/>
+        </div>
+        {/* <div className="mt-2" onClick={handleUser} ><Icons type={IconType.ProfileIcon}/></div> */}
         <div className="flex flex-col gap-1 items-center">
           <div className="ml-1 w-4 h-4 rounded-full bg-red-500 flex justify-center items-center text-sm">
             {count}
           </div>
           <div className="-mt-2" onClick={handleCart}><Icons type={IconType.CartIcon} /></div>
         </div>
-        <div className="w-12 flex items-center mt-2" onClick={handleLogout}><Icons type={IconType.LogoutIcon} /></div>
+        <div className="w-12 flex items-center h-12" onClick={handleLogout}><Icons type={IconType.LogoutIcon} /></div>
       </div>
     </div>
   )

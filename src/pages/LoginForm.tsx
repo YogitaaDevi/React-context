@@ -52,15 +52,15 @@ const LoginForm = () => {
   
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center">
-      <div className="w-98 border flex flex-col gap-5 shadow rounded-lg">
-        <div className="text-2xl font-bold flex h-20 items-center justify-center">Login Form</div>
+      <div className="w-98 border flex flex-col gap-5 shadow rounded-lg bg-slate-200">
+        <div className="text-2xl font-bold flex h-20 items-center justify-center">Login</div>
         <div className="h-full flex flex-col items-center">
           <div className="mb-8">
-            <TextField className="border-2 rounded-md h-10 w-72 pl-2" type="text" placeholder="Enter your username" onChange={(e: any) => setName(e.target.value)} />
+            <TextField className="border-2 border-white rounded-md h-10 w-72 pl-2 focus:outline-none" type="text" placeholder="Enter your username" onChange={(e: any) => setName(e.target.value)} />
             <div className="text-red-500 text-sm">{nameError}</div>
           </div>
           <div className="mb-3">
-            <TextField className="border-2 rounded-md h-10 w-72 pl-2" type={showPassword ? "text" : "password"} placeholder="Enter your password" onChange={(e: any) => setPassword(e.target.value)} />
+            <TextField className="border-2 border-white rounded-md h-10 w-72 pl-2 focus:outline-none" type={showPassword ? "text" : "password"} placeholder="Enter your password" onChange={(e: any) => setPassword(e.target.value)} />
             <div className="text-red-500 text-sm">{passowrdError}</div>
           </div>
           <div className="flex gap-10 text-gray-500 items-center mt-2">
@@ -70,7 +70,7 @@ const LoginForm = () => {
             </div>
             <a href="">Forget Password?</a>
           </div>
-          <Button className="mt-10 w-44 bg-slate-700 font-bold text-white h-12 rounded text-lg hover:bg-slate-500" name="Login" onClick={handleSubmit} />
+          <Button className="mt-10 w-44 bg-slate-700 font-bold text-white h-12 rounded text-lg hover:bg-slate-800 focus:outline-none" name="Submit" onClick={handleSubmit} variant="PRIMARY"/>
         </div>
       </div>
     </div>

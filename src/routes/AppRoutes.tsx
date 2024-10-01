@@ -7,8 +7,10 @@ import ProductDisplayPage from '../pages/ProductDisplayPage'
 import CartPage from '../pages/CartPage'
 import PrivateRoute from './PrivateRoute'
 import HomePage from '../pages/HomePage'
-import ProfilePage from '../pages/ProfilePage'
+import UserPage from '../pages/UserPage'
 import PaymentSuccessPage from '../pages/PaymentSuccessPage'
+import OrderPage from '../pages/OrderPage'
+import ProfilePage from '../pages/ProfilePage'
 
 const AppRoutes = () => {
 
@@ -22,7 +24,9 @@ const AppRoutes = () => {
             <Route path='/home' element={<HomePage />} />
             <Route path='/home/product' element={<ProductDisplayPage />} />
             <Route path='/home/cart' element={<CartPage />} />
-            <Route path='/home/profile' element={<ProfilePage/>}/>
+            <Route path='/home/user' element={<UserPage/>}/>
+            <Route path='/home/user/profile' element={<ProfilePage/>}/>
+            <Route path='/home/user/order' element={<OrderPage />} />
             <Route path='/home/payment' element={<PaymentSuccessPage/>}/>
           </Route>
         </Route>

@@ -23,12 +23,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </div>
       <div className='flex items-center justify-center gap-5'>
-      <Button className='h-10 w-48 flex items-center justify-center bg-blue-500 rounded text-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300' name='Add to Cart' onClick={() => setIsAdd((prev: boolean) => !prev)} />
+      <Button className='h-10 w-48 flex items-center justify-center bg-blue-500 rounded text-white hover:bg-blue-700' name='Add to Cart' onClick={() => setIsAdd((prev: boolean) => !prev)} variant='PRIMARY' />
       </div>
       {isAdd ? <div className="flex items-center justify-center gap-5 mt-2">
-        <Button className='h-10 w-12 flex items-center justify-center bg-red-500 rounded text-white hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300' name='-' onClick={() => handleDecrement(product)} />
+        <Button className='h-10 w-12 flex items-center justify-center bg-red-500 rounded text-white hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300' name='-' onClick={() => handleDecrement(product)} variant='SECONDARY' />
         {product.count}
-        <Button className='h-10 w-12 flex items-center justify-center bg-green-500 rounded text-white hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300' name='+' onClick={() => handleIncrement(product)} />
+        <Button className='h-10 w-12 flex items-center justify-center bg-green-500 rounded text-white hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300' name='+' onClick={() => handleIncrement(product)} variant='SECONDARY' />
       </div> : ""}
     </div>
   )

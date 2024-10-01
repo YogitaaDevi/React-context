@@ -90,7 +90,6 @@ const ProfileIcon = () => {
   )
 }
 
-
 export const Icons = ({ type }: { type: IconType }) => {
   switch (type) {
     case IconType.CartIcon:
