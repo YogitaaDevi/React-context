@@ -34,7 +34,10 @@ const CartPage = () => {
           isOrder ?
             <div className="mt-10 flex gap-10">
               <Button className='bg-red-500 text-white w-36 h-12 rounded hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300' name='Back' onClick={() => navigate("/home/product")} />
-              <Button className='bg-green-500 text-white w-36 h-12 rounded hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300' name='₹ Payment' onClick={handlePayment} />
+              {cart.length !== 0 ?
+                <Button className='bg-green-500 text-white w-36 h-12 rounded hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300' name='₹ Payment' onClick={handlePayment} />
+                : ""
+              }
             </div> : ""
         }
       </div>
