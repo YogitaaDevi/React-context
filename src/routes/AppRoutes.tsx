@@ -8,6 +8,7 @@ import CartPage from '../pages/CartPage'
 import PrivateRoute from './PrivateRoute'
 import HomePage from '../pages/HomePage'
 import ProfilePage from '../pages/ProfilePage'
+import PaymentSuccessPage from '../pages/PaymentSuccessPage'
 
 const AppRoutes = () => {
 
@@ -22,6 +23,7 @@ const AppRoutes = () => {
             <Route path='/home/product' element={<ProductDisplayPage />} />
             <Route path='/home/cart' element={<CartPage />} />
             <Route path='/home/profile' element={<ProfilePage/>}/>
+            <Route path='/home/payment' element={<PaymentSuccessPage/>}/>
           </Route>
         </Route>
       </Route>

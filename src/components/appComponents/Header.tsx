@@ -6,7 +6,7 @@ import { AuthContextProvider } from "../../context/AuthContext"
 
 const Header = () => {
 
-  const { count, hideOrderButton, showOrderButton } = useContext(ProductContextProvider)
+  const { count, hideOrderButton, showOrderButton, isPayment } = useContext(ProductContextProvider)
   const { handleLogout, user } = useContext(AuthContextProvider)
   const navigate = useNavigate();
   const [greeting, setGreeting] = useState<string>("");
@@ -29,8 +29,13 @@ const Header = () => {
     }
 
     const handleCart = () => {
-      navigate("/home/cart")
-      showOrderButton()
+      if(isPayment) {
+        navigate("/home/payment")
+      }
+      else {
+        navigate("/home/cart")
+        showOrderButton()
+      }
     }
 
   return (
