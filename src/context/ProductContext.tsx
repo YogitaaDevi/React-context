@@ -12,7 +12,12 @@ const ProductContextValue = {
   cart: [{ id: 0, name: "", price: 0, image: "", count: 0 }],
   handleIncrement: (product: ProductType) => { },
   handleDecrement: (product: ProductType) => { },
-  totalCost: 0
+  totalCost: 0,
+  showOrderButton: () => { },
+  hideOrderButton: () => { },
+  isOrder: false,
+  paymentSuccess: () => { }, 
+  isPayment: false
 }
 
 export const ProductContextProvider = createContext(ProductContextValue);
@@ -23,6 +28,9 @@ const ProductContext = ({ children }: ProductContextProps) => {
   const [cart, setCart] = useState<ProductType[]>([])
   const [count, setCount] = useState<number>(0);
   const [totalCost, setTotalCost] = useState<number>(0)
+  const [isOrder, setIsOrder] = useState<boolean>(false);
+  const [isPayment, setIsPayment] = useState<boolean>(false);
+
   let productFilter: any;
   let cartProduct: any;
 
@@ -43,6 +51,17 @@ const ProductContext = ({ children }: ProductContextProps) => {
 
   const findCartProduct = (cart: ProductType[]) => {
     return cart.find((data) => data.id === productFilter.id)
+  }
+
+  const showOrderButton = () => {
+    setIsOrder(true)
+  }
+
+  const hideOrderButton = () => {
+    setIsOrder(false)
+  }
+  const paymentSuccess = () => {
+    setIsPayment((prev:boolean) => !prev)
   }
 
   const handleProduct = (product: ProductType) => {
@@ -74,7 +93,7 @@ const ProductContext = ({ children }: ProductContextProps) => {
     }
   }
   return (
-    <ProductContextProvider.Provider value={{ count, handleIncrement, handleDecrement, product, cart, totalCost }}>
+    <ProductContextProvider.Provider value={{ count, handleIncrement, handleDecrement, product, cart, totalCost, hideOrderButton, showOrderButton , isOrder, paymentSuccess, isPayment }}>
       {children}
     </ProductContextProvider.Provider>
   )

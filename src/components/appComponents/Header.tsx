@@ -6,8 +6,8 @@ import { AuthContextProvider } from "../../context/AuthContext"
 
 const Header = () => {
 
-  const { count } = useContext(ProductContextProvider)
-  const { handleLogout, userName } = useContext(AuthContextProvider)
+  const { count, hideOrderButton, showOrderButton } = useContext(ProductContextProvider)
+  const { handleLogout, user } = useContext(AuthContextProvider)
   const navigate = useNavigate();
   const [greeting, setGreeting] = useState<string>("");
   let hours = new Date().getHours();
@@ -23,6 +23,16 @@ const Header = () => {
       setGreeting("Night Carvings? -")
     }, [hours])
 
+    const handleProfile = () => {
+      navigate("/home/profile")
+      hideOrderButton()
+    }
+
+    const handleCart = () => {
+      navigate("/home/cart")
+      showOrderButton()
+    }
+
   return (
     <div className="flex h-20 justify-between items-center bg-slate-500 text-white w-full border">
       <div className="flex items-center justify-center gap-2">
@@ -30,15 +40,16 @@ const Header = () => {
           <Icons type={IconType.FoodServingIcon} />
         </div>
         <div className="text-xl font-bold">
-          {greeting} {userName} !!!
+          {greeting} {user.name} !!!
         </div>
       </div>
       <div className="flex gap-8">
+        <div className="mt-2" onClick={handleProfile} ><Icons type={IconType.ProfileIcon}/></div>
         <div className="flex flex-col gap-1 items-center">
           <div className="ml-1 w-4 h-4 rounded-full bg-red-500 flex justify-center items-center text-sm">
             {count}
           </div>
-          <div className="-mt-2" onClick={() => navigate("/home/cart")}><Icons type={IconType.CartIcon} /></div>
+          <div className="-mt-2" onClick={handleCart}><Icons type={IconType.CartIcon} /></div>
         </div>
         <div className="w-12 flex items-center mt-2" onClick={handleLogout}><Icons type={IconType.LogoutIcon} /></div>
       </div>

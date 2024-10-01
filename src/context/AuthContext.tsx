@@ -1,12 +1,13 @@
 import { createContext, useState } from "react"
+import { UserType } from "../types/UserType"
 interface AuthContextProps {
   children: any
 }
 
 const AuthContextValue = {
   isAuthenticated: false,
-  userName: "",
-  handleLogin: (name: string) => { },
+  user: { id: 0, name: "", password: "" },
+  handleLogin: (user: UserType) => { },
   handleLogout: () => { }
 }
 
@@ -15,17 +16,17 @@ export const AuthContextProvider = createContext(AuthContextValue)
 const AuthContext = ({ children }: AuthContextProps) => {
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>("");
-  
-  const handleLogin = (name:string) => {
+  const [user, setUser] = useState<UserType>({ id: 0, name: "", password: "" });
+
+  const handleLogin = (user: UserType) => {
     setIsAuthenticated(true)
-    setUserName(name)
+    setUser(user)
   }
   const handleLogout = () => {
     setIsAuthenticated(false)
   }
   return (
-    <AuthContextProvider.Provider value={{ isAuthenticated, handleLogin, handleLogout, userName }}>
+    <AuthContextProvider.Provider value={{ isAuthenticated, handleLogin, handleLogout, user }}>
       {children}
     </AuthContextProvider.Provider>
   )
