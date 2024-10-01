@@ -1,10 +1,9 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { ProductContextProvider } from '../context/ProductContext'
 import CartCard from '../components/appComponents/CartCard'
 import EmptyCartPage from './EmptyCartPage'
 import Button from '../components/commonComponents/Button'
 import { useNavigate } from 'react-router-dom'
-import PaymentSuccessPage from './PaymentSuccessPage'
 
 const CartPage = () => {
 

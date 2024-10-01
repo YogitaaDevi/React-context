@@ -1,4 +1,3 @@
-import HomePage from './HomePage'
 import ProductName from './ProductName'
 import ProductsList from './ProductsList'
 
