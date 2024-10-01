@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ProductContextProvider } from '../context/ProductContext'
 import CartCard from '../components/appComponents/CartCard'
-import EmptyCartPage from './EmptyCartPage'
+import EmptyPage from './EmptyPage'
 import Button from '../components/commonComponents/Button'
 import { useNavigate } from 'react-router-dom'
 
@@ -24,7 +24,7 @@ const CartPage = () => {
           }
         </div>
         {
-          cart.length === 0 ? <EmptyCartPage /> :
+          cart.length === 0 ? <EmptyPage /> :
             <div className="bg-white flex flex-col items-center mt-10">
               {cart.map((item) => <CartCard item={item} key={item.id} />)}
               <div className="text-xl mt-10 font-bold">Total Price including GST is: {totalCost}</div>

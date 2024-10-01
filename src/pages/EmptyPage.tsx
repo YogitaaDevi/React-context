@@ -2,7 +2,7 @@ import { useContext } from "react"
 import oopsImage from "../assets/images/oops.jpg"
 import { ProductContextProvider } from "../context/ProductContext"
 
-const EmptyCartPage = () => {
+const EmptyPage = () => {
     const {isPayment, isOrder} = useContext(ProductContextProvider)
   return (
     <div className="text-2xl font-bold">
@@ -14,4 +14,4 @@ const EmptyCartPage = () => {
   )
 }
 
-export default EmptyCartPage
+export default EmptyPage

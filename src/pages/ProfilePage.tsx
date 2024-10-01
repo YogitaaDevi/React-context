@@ -5,7 +5,7 @@ import servingChef from "../assets/images/serving-chef.jfif"
 import Button from "../components/commonComponents/Button"
 import CartPage from "./CartPage"
 import { ProductContextProvider } from "../context/ProductContext"
-import EmptyCartPage from "./EmptyCartPage"
+import EmptyPage from "./EmptyPage"
 import { useNavigate } from "react-router-dom"
 
 const ProfilePage = () => {
@@ -34,7 +34,7 @@ const ProfilePage = () => {
                 </div>
               </div>
             </div>
-            : <EmptyCartPage />
+            : <EmptyPage />
           }
           <div className="">
             <Button className='bg-red-500 text-white w-36 h-10 rounded hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300' name='Back' onClick={() => navigate("/home/product")} />
