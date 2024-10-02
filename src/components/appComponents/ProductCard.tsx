@@ -10,6 +10,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   const { handleIncrement, handleDecrement } = useContext(ProductContextProvider)
   const [isAdd, setIsAdd] = useState<boolean>(false);
+  const handleAddCart = () => {
+    setIsAdd((prev: boolean) => !prev)
+    handleIncrement(product)
+  }
 
   return (
     <div className="w-64 h-96 border shadow flex flex-col gap-3 bg-gray-100" key={product.id}>
@@ -23,12 +27,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </div>
       <div className='flex items-center justify-center gap-5'>
-      <Button className='h-10 w-48 flex items-center justify-center bg-blue-500 rounded text-white hover:bg-blue-700' name='Add to Cart' onClick={() => setIsAdd((prev: boolean) => !prev)} variant='PRIMARY' />
-      </div>
+      <Button className='bg-blue-500 hover:bg-blue-700' name='Add to Cart' onClick={handleAddCart} variant='PRIMARY' />
+      </div>  
       {isAdd ? <div className="flex items-center justify-center gap-5 mt-2">
-        <Button className='h-10 w-12 flex items-center justify-center bg-red-500 rounded text-white hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300' name='-' onClick={() => handleDecrement(product)} variant='SECONDARY' />
+        <Button className='bg-red-500' name='-' onClick={() => handleDecrement(product)} variant='SECONDARY' size='sm' />
         {product.count}
-        <Button className='h-10 w-12 flex items-center justify-center bg-green-500 rounded text-white hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300' name='+' onClick={() => handleIncrement(product)} variant='SECONDARY' />
+        <Button className='bg-green-500' name='+' onClick={() => handleIncrement(product)} variant='SECONDARY' size='sm' />
       </div> : ""}
     </div>
   )

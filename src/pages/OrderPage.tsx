@@ -28,7 +28,7 @@ const OrderPage = () => {
             : <EmptyPage />
           }
           <div className="">
-            <Button className='bg-red-500 text-white w-36 h-10 rounded hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300' name='Back' onClick={() => navigate(-1)} />
+            <Button className='bg-red-500' name='Back' onClick={() => navigate(-1)} variant='SECONDARY' size='md' />
           </div>
         </div>
     </>

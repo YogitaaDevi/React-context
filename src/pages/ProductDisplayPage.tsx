@@ -1,5 +1,5 @@
 import ProductName from './ProductName'
-import ProductsList from './ProductsList'
+import ProductsList from './ProductPage'
 
 const ProductDisplayPage = () => {
   return (

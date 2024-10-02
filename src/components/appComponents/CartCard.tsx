@@ -24,9 +24,9 @@ const CartCard = ({ item }: CartCardProps) => {
         Rs.{item.price}
       </div>
       {isOrder? <div className="w-40 flex justify-center gap-4 items-center">
-        <Button className='h-10 w-12 flex items-center justify-center bg-red-500 rounded text-white hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300' name='-' onClick={() => handleDecrement(item)} />
+        <Button className='bg-red-500' name='-' onClick={() => handleDecrement(item)} variant='SECONDARY' size='sm' />
         {item.count}
-        <Button className='h-10 w-12 flex items-center justify-center bg-green-500 rounded text-white hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300' name='+' onClick={() => handleIncrement(item)} />
+        <Button className=' bg-green-500' name='+' onClick={() => handleIncrement(item)} variant='SECONDARY' size='sm' />
       </div> : ""}
       <div className="flex justify-center items-center gap-10 text-xl">
         =

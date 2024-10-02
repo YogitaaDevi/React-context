@@ -1,7 +1,7 @@
 import { Navigate, Routes } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import MainLayout from '../layouts/MainLayout'
-import LoginForm from '../pages/LoginForm'
+import LoginForm from '../pages/LoginPage'
 import AppLayout from '../layouts/AppLayout'
 import ProductDisplayPage from '../pages/ProductDisplayPage'
 import CartPage from '../pages/CartPage'

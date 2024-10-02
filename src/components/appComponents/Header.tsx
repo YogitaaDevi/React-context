@@ -52,7 +52,6 @@ const Header = () => {
         <div className="flex items-center">
         <img src={user.image} alt="" className="w-10 h-10 rounded-full" onClick={handleUser}/>
         </div>
-        {/* <div className="mt-2" onClick={handleUser} ><Icons type={IconType.ProfileIcon}/></div> */}
         <div className="flex flex-col gap-1 items-center">
           <div className="ml-1 w-4 h-4 rounded-full bg-red-500 flex justify-center items-center text-sm">
             {count}

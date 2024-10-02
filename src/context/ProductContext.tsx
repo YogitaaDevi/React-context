@@ -65,6 +65,7 @@ const ProductContext = ({ children }: ProductContextProps) => {
   }
   const paymentSuccess = () => {
     setIsPayment((prev: boolean) => !prev)
+    setCount(0)
   }
 
   const handleProduct = (product: ProductType) => {

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ProductContextProvider } from '../context/ProductContext'
 import CartCard from '../components/appComponents/CartCard'
-import EmptyPage from './EmptyPage'
+import EmptyCartPage from './EmptyPage'
 import Button from '../components/commonComponents/Button'
 import { useNavigate } from 'react-router-dom'
 
@@ -24,7 +24,7 @@ const CartPage = () => {
           }
         </div>
         {
-          cart.length === 0 ? <EmptyPage /> :
+          cart.length === 0 ? <EmptyCartPage /> :
             <div className="bg-white flex flex-col items-center mt-10">
               {cart.map((item) => <CartCard item={item} key={item.id} />)}
               <div className="text-xl mt-10 font-bold">Total Price including GST is: {totalCost}</div>
@@ -33,9 +33,9 @@ const CartPage = () => {
         {
           isOrder ?
             <div className="mt-10 flex gap-10">
-              <Button className='bg-red-500 text-white w-36 h-12 rounded hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300' name='Back' onClick={() => navigate("/home/product")} />
+              <Button className='bg-red-500' name='Back' onClick={() => navigate("/home/product")} variant='SECONDARY' size='md' />
               {cart.length !== 0 ?
-                <Button className='bg-green-500 text-white w-36 h-12 rounded hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300' name='₹ Payment' onClick={handlePayment} />
+                <Button className='bg-green-500' name='₹ Payment' onClick={handlePayment} variant='SECONDARY' size='md' />
                 : ""
               }
             </div> : ""

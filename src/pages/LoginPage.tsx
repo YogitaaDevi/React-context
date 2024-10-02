@@ -70,7 +70,7 @@ const LoginForm = () => {
             </div>
             <a href="">Forget Password?</a>
           </div>
-          <Button className="mt-10 w-44 bg-slate-700 font-bold text-white h-12 rounded text-lg hover:bg-slate-800 focus:outline-none" name="Submit" onClick={handleSubmit} variant="PRIMARY"/>
+          <Button className="bg-slate-700 mt-10" name="Submit" onClick={handleSubmit} variant="PRIMARY"/>
         </div>
       </div>
     </div>

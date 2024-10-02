@@ -13,7 +13,7 @@ const PaymentSuccessPage = () => {
         We are glad to inform you that your order will be arriving soon...
       </div>
       <div className="flex mt-5">
-        <Button className='bg-red-500 text-white w-36 h-12 rounded hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300' name='Back' onClick={() => navigate("/home/product")} />
+        <Button className='bg-red-500' name='Back' onClick={() => navigate("/home/product")} variant='SECONDARY' size='md' />
       </div>
     </div>
   )

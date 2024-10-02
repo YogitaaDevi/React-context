@@ -28,7 +28,7 @@ const UserPage = () => {
           </div>
         </div>
       </div>
-      <Button className='bg-red-500 text-white w-36 h-10 mt-5 rounded hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300' name='Back' onClick={() => navigate("/home/product")} />
+      <Button className='bg-red-500' name='Back' onClick={() => navigate("/home/product")} variant='SECONDARY' size='md'/>
     </div>
   )
 }
