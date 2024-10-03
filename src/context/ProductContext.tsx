@@ -59,11 +59,6 @@ const ProductContext = ({ children }: ProductContextProps) => {
     setProduct((prev: any) => prev.map((item: ProductType) => ({ ...item, count: 0 })));
   }, [cart]);
 
-  console.log(product)
-  console.log(cart)
-  console.log("-------------order", order)
-  console.log(count)
-
   const handleProduct = useCallback((product: ProductType) => {
     setProduct((prev: ProductType[]) =>
       prev.map((data) => (data.id === product.id ? product : data))

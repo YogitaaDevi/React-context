@@ -1,11 +1,10 @@
-import React, { useMemo } from 'react'
-import { useContext } from "react"
+import { useContext, useMemo } from "react"
 import CartPage from "./CartPage"
 import { ProductContextProvider } from "../context/ProductContext"
 import servingChef from "../assets/images/serving-chef.jfif"
 import EmptyPage from "./EmptyPage"
-import Button from '../components/commonComponents/Button'
-import { useNavigate } from 'react-router-dom'
+import Button from "../components/commonComponents/Button"
+import { useNavigate } from "react-router-dom"
 
 const OrderPage = () => {
   const { isPayment } = useContext(ProductContextProvider)
@@ -17,10 +16,10 @@ const OrderPage = () => {
         {isPayment ?
           <div className="flex flex-col w-full gap-5 border-2">
             <div className="flex">
-              <div className="flex gap-2 text-xl">
-                <img src={servingChef} alt="" className="h-84 w-84" />
+              <div className="flex w-1/2 justify-center">
+                <img src={servingChef} alt="" className="w-80" />
               </div>
-              <div className="flex justify-center w-full">
+              <div className="flex w-2/6">
                 <CartPage />
               </div>
             </div>
@@ -33,10 +32,10 @@ const OrderPage = () => {
 
   return (
     <>
-      <div className='w-full flex flex-col gap-10 items-center'>
+      <div className="w-full flex flex-col gap-10 items-center">
         {renderedOrder}
         <div className="">
-          <Button className='bg-red-500' name='Back' onClick={() => navigate(-1)} variant='SECONDARY' size='md' />
+          <Button className="bg-red-500" name="Back" onClick={() => navigate(-1)} variant="SECONDARY" />
         </div>
       </div>
     </>

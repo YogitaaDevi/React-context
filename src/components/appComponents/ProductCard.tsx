@@ -1,7 +1,7 @@
-import { useCallback, useContext, useState } from 'react'
-import { ProductType } from '../../types/ProductType'
-import Button from '../commonComponents/Button'
-import { ProductContextProvider } from '../../context/ProductContext'
+import { useCallback, useContext, useState } from "react"
+import { ProductType } from "../../types/ProductType"
+import Button from "../commonComponents/Button"
+import { ProductContextProvider } from "../../context/ProductContext"
 
 interface ProductCardProps {
   product: ProductType
@@ -30,18 +30,18 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
       <div className="flex flex-col items-center justify-center gap-1">
         <div className="text-xl font-bold">{product.name}</div>
-        <div className='text-lg'>
+        <div className="text-lg">
           Rs.{product.price}
         </div>
       </div>
-      <div className='flex items-center justify-center'>
-      {isAdd ? "" : <Button className='bg-blue-500 hover:bg-blue-700' name='Add to Cart' onClick={handleAddCart} variant='PRIMARY' />}
+      <div className="flex items-center justify-center">
+      {!isAdd && <Button className="bg-blue-500 hover:bg-blue-700" name="Add to Cart" onClick={handleAddCart} size="lg" />}
       </div>  
-      {isAdd ? <div className="flex items-center justify-center gap-5">
-        <Button className='bg-red-500' name='-' onClick={() => handleDecrement(product)} variant='SECONDARY' size='sm' />
+      {isAdd && <div className="flex items-center justify-center gap-5">
+        <Button className="bg-red-500 focus:ring-red-700" name="-" onClick={() => handleDecrement(product)} variant="SECONDARY" size="sm" />
         {handleRemoveCart()}
-        <Button className='bg-green-500' name='+' onClick={() => handleIncrement(product)} variant='SECONDARY' size='sm' />
-      </div> : ""}
+        <Button className="bg-green-500 focus:ring-green-700" name="+" onClick={() => handleIncrement(product)} variant="SECONDARY" size="sm" />
+      </div>}
     </div>
   )
 }

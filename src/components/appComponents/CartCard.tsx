@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext, useMemo } from "react";
 import { ProductType } from "../../types/ProductType"
 import { ProductContextProvider } from "../../context/ProductContext";
 import Button from "../commonComponents/Button";
@@ -10,10 +10,19 @@ interface CartCardProps {
 const CartCard = ({ item }: CartCardProps) => {
 
   const { handleDecrement, handleIncrement, order } = useContext(ProductContextProvider)
-  
-  const handleItemCost = (price: number, count: number) => {
+
+  const handleItemCost = useCallback((price: number, count: number) => {
     return price * count;
-  }
+  }, [item.price, item.count])
+
+  const handleOrder = useMemo(() => (
+    order.length === 0 ?
+      <>
+        <Button className="bg-red-500 focus:ring-red-700" name="-" onClick={() => handleDecrement(item)} variant="SECONDARY" size="sm" />
+        {item.count}
+        <Button className=" bg-green-500 focus:ring-green-700" name="+" onClick={() => handleIncrement(item)} variant="SECONDARY" size="sm" />
+      </> : <> X{item.count} </>
+  ), [order, item.count])
 
   return (
     <div className="w-full flex items-center gap-5 h-24 border-b">
@@ -24,14 +33,12 @@ const CartCard = ({ item }: CartCardProps) => {
         <div className="text-2xl">{item.name}</div>
         Rs.{item.price}
       </div>
-      {order.length === 0 ? <div className="w-40 flex justify-center gap-4 items-center">
-        <Button className="bg-red-500" name="-" onClick={() => handleDecrement(item)} variant="SECONDARY" size="sm" />
-        {item.count}
-        <Button className=" bg-green-500" name="+" onClick={() => handleIncrement(item)} variant="SECONDARY" size="sm" />
-      </div> : ""}
+      <div className="w-40 flex justify-center gap-4 text-lg items-center font-semibold">
+        {handleOrder}
+      </div>
       <div className="flex justify-center items-center gap-10 text-xl">
         =
-        <div className="font-bold">
+        <div className="font-bold text-xl">
           {handleItemCost(item.price, item.count)}
         </div>
       </div>

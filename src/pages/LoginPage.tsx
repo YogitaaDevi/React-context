@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContextProvider } from "../context/AuthContext";
 import { users } from "../data/Users";
 
-const LoginForm = () => {
+const LoginPage = () => {
 
   const [name, setName] = useState<string>("")
   const [nameError, setNameError] = useState<string>("");
@@ -72,10 +72,10 @@ const LoginForm = () => {
             </div>
             <a href="">Forget Password?</a>
           </div>
-          <Button className="bg-slate-700 mt-10" name="Submit" onClick={handleSubmit} variant="PRIMARY" />
+          <Button className="bg-slate-700 hover:bg-slate-500 mt-10" name="Submit" onClick={handleSubmit} size="lg"/>
         </div>
       </div>
     </div>
   )
 }
-export default LoginForm
+export default LoginPage

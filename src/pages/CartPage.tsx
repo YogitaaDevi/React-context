@@ -1,9 +1,9 @@
-import { useContext, useMemo } from 'react'
-import { ProductContextProvider } from '../context/ProductContext'
-import CartCard from '../components/appComponents/CartCard'
-import EmptyCartPage from './EmptyPage'
-import Button from '../components/commonComponents/Button'
-import { useNavigate } from 'react-router-dom'
+import { useContext, useMemo } from "react"
+import { ProductContextProvider } from "../context/ProductContext"
+import CartCard from "../components/appComponents/CartCard"
+import EmptyCartPage from "./EmptyPage"
+import Button from "../components/commonComponents/Button"
+import { useNavigate } from "react-router-dom"
 
 const CartPage = () => {
 
@@ -31,16 +31,13 @@ const CartPage = () => {
     </>
   ), [cart, totalCost, order]);
 
-  console.log(cart.length)
-  console.log(order.length)
-
   const renderButton = useMemo(() => (
     <>
       {order.length === 0 && (
         <div className="mt-10 flex gap-10">
-          <Button className='bg-red-500' name='Back' onClick={() => navigate("/home/product")} variant='SECONDARY' size='md' />
+          <Button className="bg-red-500" name="Back" onClick={() => navigate("/home/product")} variant="SECONDARY" />
           {cart.length !== 0 && (
-            <Button className='bg-green-500' name='₹ Payment' onClick={handlePayment} variant='SECONDARY' size='md' />
+            <Button className="bg-green-500" name="₹ Payment" onClick={handlePayment} variant="SECONDARY"  />
           )}
         </div>
       )}

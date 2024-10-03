@@ -2,21 +2,10 @@ import { useNavigate } from "react-router-dom"
 import chef from "../assets/images/chef-bg.jpg"
 import Button from "../components/commonComponents/Button"
 import "../assets/scss/HomePage.scss"
-import { useMemo } from "react";
 
 const HomePage = () => {
 
   const navigate = useNavigate();
-  
-  const welcomeText = useMemo(() => (
-    <div className="text-7xl">Welcome to Kala's Kitchen</div>
-  ), []);
-
-  const descriptionText = useMemo(() => (
-    <div className="text-lg">
-      Experience the rich flavors of India, right at your table. At Kala's Kitchen, we offer a delectable range of both vegetarian and non-vegetarian dishes, prepared with authentic Indian spices and fresh ingredients. From traditional curries to mouth-watering tandoori delights, our menu brings you the best of Indian cuisine. Whether you're craving a comforting idly or a flavorful non-veg biryani, Kala's Kitchen has something to satisfy every palate. Join us for a taste of India!
-    </div>
-  ), []);
 
   return (
     <>
@@ -26,10 +15,12 @@ const HomePage = () => {
           style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}>
           <div className="flex h-full mt-24 justify-center">
             <div className="text-white w-150 h-24 flex flex-col gap-6">
-              {welcomeText}
-              {descriptionText}
+              <div className="text-7xl">Welcome to Kala's Kitchen</div>
+              <div className="text-lg">
+                Experience the rich flavors of India, right at your table. At Kala"s Kitchen, we offer a delectable range of both vegetarian and non-vegetarian dishes, prepared with authentic Indian spices and fresh ingredients. From traditional curries to mouth-watering tandoori delights, our menu brings you the best of Indian cuisine. Whether you"re craving a comforting idly or a flavorful non-veg biryani, Kala"s Kitchen has something to satisfy every palate. Join us for a taste of India!
+              </div>
               <div>
-                <Button className="text-black hover:bg-slate-200" name="View items" onClick={() => navigate("/home/product")} variant="PRIMARY" />
+                <Button className="text-black hover:bg-slate-200" name="View items" onClick={() => navigate("/home/product")} size="lg"/>
               </div>
             </div>
           </div>
