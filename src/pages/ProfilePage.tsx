@@ -54,7 +54,7 @@ const ProfilePage = () => {
           </div>
         </div>
         <div className='w-64 h-8 flex justify-center gap-5'>
-          <Button className='w-36 h-10 rounded bg-slate-700 text-white' name='Your Orders' onClick={() => navigate("/home/user/order")} />
+          <Button className='bg-slate-700' name='Your Orders' onClick={() => navigate("/home/user/order")} variant='PRIMARY' size='md' />
           <Button className='w-28 h-10 rounded bg-red-500 text-white' name='Back' onClick={() => navigate(-1)} />
         </div>
       </div>

@@ -1,7 +1,7 @@
-import { useContext } from 'react';
-import { ProductType } from '../../types/ProductType'
-import { ProductContextProvider } from '../../context/ProductContext';
-import Button from '../commonComponents/Button';
+import { useContext } from "react";
+import { ProductType } from "../../types/ProductType"
+import { ProductContextProvider } from "../../context/ProductContext";
+import Button from "../commonComponents/Button";
 
 interface CartCardProps {
   item: ProductType,
@@ -9,7 +9,8 @@ interface CartCardProps {
 
 const CartCard = ({ item }: CartCardProps) => {
 
-  const { handleDecrement, handleIncrement, isOrder } = useContext(ProductContextProvider)
+  const { handleDecrement, handleIncrement, order } = useContext(ProductContextProvider)
+  
   const handleItemCost = (price: number, count: number) => {
     return price * count;
   }
@@ -23,10 +24,10 @@ const CartCard = ({ item }: CartCardProps) => {
         <div className="text-2xl">{item.name}</div>
         Rs.{item.price}
       </div>
-      {isOrder? <div className="w-40 flex justify-center gap-4 items-center">
-        <Button className='bg-red-500' name='-' onClick={() => handleDecrement(item)} variant='SECONDARY' size='sm' />
+      {order.length === 0 ? <div className="w-40 flex justify-center gap-4 items-center">
+        <Button className="bg-red-500" name="-" onClick={() => handleDecrement(item)} variant="SECONDARY" size="sm" />
         {item.count}
-        <Button className=' bg-green-500' name='+' onClick={() => handleIncrement(item)} variant='SECONDARY' size='sm' />
+        <Button className=" bg-green-500" name="+" onClick={() => handleIncrement(item)} variant="SECONDARY" size="sm" />
       </div> : ""}
       <div className="flex justify-center items-center gap-10 text-xl">
         =

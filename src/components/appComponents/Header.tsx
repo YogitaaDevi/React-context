@@ -34,7 +34,6 @@ const Header = () => {
       }
       else {
         navigate("/home/cart")
-        showOrderButton()
       }
     }
 

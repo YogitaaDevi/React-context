@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useCallback, useContext, useMemo, useState } from "react"
 import TextField from "../components/commonComponents/TextField"
 import Button from "../components/commonComponents/Button";
 import { useNavigate } from "react-router-dom";
@@ -15,41 +15,43 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { handleLogin } = useContext(AuthContextProvider)
 
-  const handleSubmit = () => {
-    let user = users.find((data) => data.name === name && data.password === password)
+  const user = useMemo(() =>
+    users.find((data) => data.name === name && data.password === password), [name, password]);
+
+  const handleSubmit = useCallback(() => {
+
     if (name === "" && password === "") {
-      setNameError("Username is required*")
-      setPasswordError("Password is required*")
-    }
+      setNameError("Username is required*");
+      setPasswordError("Password is required*");
+    } 
     else if (name === "") {
-      setNameError("Username is required*")
-      setPasswordError("")
-    }
+      setNameError("Username is required*");
+      setPasswordError("");
+    } 
     else if (name === "null") {
-      setNameError("Provide valid username*")
-      setPasswordError("")
-    }
+      setNameError("Provide valid username*");
+      setPasswordError("");
+    } 
     else if (password === "") {
-      setPasswordError("Password is required*")
-      setNameError("")
-    }
+      setPasswordError("Password is required*");
+      setNameError("");
+    } 
     else if (password.length < 6 || password.length > 8) {
-      setPasswordError("Password must be 6 to 8 characters*")
-      setNameError("")
-    }
+      setPasswordError("Password must be 6 to 8 characters*");
+      setNameError("");
+    } 
     else if (!user) {
       setNameError("");
       setPasswordError("Username or Password is incorrect*");
-    }
+    } 
     else {
-      setNameError("")
-      setPasswordError("")
-      handleLogin(user)
-      navigate("/home", {replace: true})
+      setNameError("");
+      setPasswordError("");
+      handleLogin(user);
+      navigate("/home", { replace: true });
     }
+  }, [name, password, user]);
 
-  }
-  
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center">
       <div className="w-98 border flex flex-col gap-5 shadow rounded-lg bg-slate-200">
@@ -70,7 +72,7 @@ const LoginForm = () => {
             </div>
             <a href="">Forget Password?</a>
           </div>
-          <Button className="bg-slate-700 mt-10" name="Submit" onClick={handleSubmit} variant="PRIMARY"/>
+          <Button className="bg-slate-700 mt-10" name="Submit" onClick={handleSubmit} variant="PRIMARY" />
         </div>
       </div>
     </div>
