@@ -7,7 +7,7 @@ interface AuthContextProps {
 
 const AuthContextValue = {
   isAuthenticated: false,
-  user: { id: 0, name: "", password: "", contact: 0, location: "", image: "" },
+  user: { id: 0, mail:"", name: "", password: "", contact: 0, location: "", image: "" },
   handleLogin: (user: UserType) => {},
   handleLogout: () => {},
 };
@@ -16,7 +16,7 @@ export const AuthContextProvider = createContext(AuthContextValue);
 
 const AuthContext = ({ children }: AuthContextProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [user, setUser] = useState<UserType>({ id: 0, name: "", password: "", contact: 0, location: "", image: "",});
+  const [user, setUser] = useState<UserType>({ id: 0, mail:"", name: "", password: "", contact: 0, location: "", image: ""});
 
   const handleLogin = useCallback((user: UserType) => {
     setIsAuthenticated(true);
@@ -25,7 +25,7 @@ const AuthContext = ({ children }: AuthContextProps) => {
 
   const handleLogout = useCallback(() => {
     setIsAuthenticated(false);
-    setUser({ id: 0, name: "", password: "", contact: 0, location: "", image: "" });
+    setUser({ id: 0, mail:"", name: "", password: "", contact: 0, location: "", image: "" });
   }, []);
 
   const loginUser = useMemo(() => user, [user]);

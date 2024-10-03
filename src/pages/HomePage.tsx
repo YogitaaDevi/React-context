@@ -20,7 +20,7 @@ const HomePage = () => {
                 Experience the rich flavors of India, right at your table. At Kala"s Kitchen, we offer a delectable range of both vegetarian and non-vegetarian dishes, prepared with authentic Indian spices and fresh ingredients. From traditional curries to mouth-watering tandoori delights, our menu brings you the best of Indian cuisine. Whether you"re craving a comforting idly or a flavorful non-veg biryani, Kala"s Kitchen has something to satisfy every palate. Join us for a taste of India!
               </div>
               <div>
-                <Button className="text-black hover:bg-slate-200" name="View items" onClick={() => navigate("/home/product")} size="lg"/>
+                <Button className="text-black bg-white hover:bg-slate-200" name="View items" onClick={() => navigate("/home/product")} size="lg"/>
               </div>
             </div>
           </div>

@@ -32,15 +32,8 @@ const ProductContext = ({ children }: ProductContextProps) => {
   const [isOrder, setIsOrder] = useState<boolean>(false);
   const [isPayment, setIsPayment] = useState<boolean>(false);
 
-  let productFilter: any;
-  let cartProduct: any;
-
-  const findProduct = (id: number) => {
-    return products.find((data) => data.id === id);
-  };
-
-  const findCartProduct = (cart: ProductType[]) => {
-    return cart.find((data) => data.id === productFilter.id);
+  const findCartProduct = (cart: ProductType[], product: ProductType) => {
+    return cart.find((data) => data.id === product.id);
   };
 
   const showOrderButton = useCallback(() => {
@@ -66,30 +59,24 @@ const ProductContext = ({ children }: ProductContextProps) => {
   }, []);
 
   const handleIncrement = useCallback((product: ProductType) => {
-    productFilter = findProduct(product.id);
-    if (productFilter) {
-      productFilter.count += 1;
-      handleProduct(productFilter);
-      cartProduct = findCartProduct(cart);
-      if (!cartProduct) {
-        setCount((prev: number) => prev + 1);
-        setCart((prev: ProductType[]) => [...prev, productFilter]);
-      }
+    product.count += 1;
+    handleProduct(product);
+    if (!findCartProduct(cart, product)) {
+      setCount((prev: number) => prev + 1);
+      setCart((prev: ProductType[]) => [...prev, product]);
     }
   }, [cart]);
 
   const handleDecrement = useCallback((product: ProductType) => {
-    productFilter = findProduct(product.id);
-    if (productFilter && productFilter.count > 0) {
-      productFilter.count -= 1;
-      handleProduct(productFilter);
-      cartProduct = findCartProduct(cart);
-      if (cartProduct && productFilter.count === 0) {
+    if (product && product.count > 0) {
+      product.count -= 1;
+      handleProduct(product);
+      if (product.count === 0) {
         setCount((prev: number) => prev - 1);
         setCart((prev: ProductType[]) => prev.filter((item) => item.id !== product.id));
       }
     }
-  }, [cart, handleProduct]);
+  }, [cart]);
 
   const handleTotalCount = (itemCost: number, itemGst: number) => {
     setTotalCost((prevTotal) => prevTotal + itemCost + itemGst);
@@ -111,7 +98,7 @@ const ProductContext = ({ children }: ProductContextProps) => {
         handleTotalCount(itemTotalCost, itemGst);
       });
     }
-  }, [cart, handleTotalCount, productFilter, order]);
+  }, [cart, handleTotalCount, order]);
 
   const contextValue = useMemo(() =>
   ({

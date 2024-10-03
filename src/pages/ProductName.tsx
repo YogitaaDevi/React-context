@@ -6,7 +6,7 @@ const ProductName = () => {
         <div className="flex gap-3 items-center">
           <img src={chef} className="h-20 w-20" />
           <div className="text-5xl font-bold">
-            KaLa"s Kitchen
+            KaLa's Kitchen
             <div className="text-lg">
               An Indian Cuisine Restaurent
             </div>

@@ -26,10 +26,10 @@ const ProfilePage = () => {
             </div>
             <div className="w-64 h-8 flex">
               <div className="w-36 font-bold text-xl">
-                Password:
+                Email id:
               </div>
               <div className="text-lg">
-                {user.password}
+                {user.mail}
               </div>
             </div>
             <div className="w-64 h-8 flex">
