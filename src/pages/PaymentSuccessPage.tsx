@@ -17,7 +17,7 @@ const PaymentSuccessPage = () => {
         We are glad to inform you that your order will be arriving soon...
       </div>
       <div className="flex mt-5">
-        <Button className="bg-red-500" name="Back" onClick={() => navigate("/home/product")} variant="SECONDARY" />
+        <Button className="bg-red-500 focus:ring-red-700" name="Back" onClick={() => navigate("/home/product")} variant="SECONDARY" />
       </div>
     </div>
   )

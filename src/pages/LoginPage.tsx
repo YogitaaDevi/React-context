@@ -66,9 +66,9 @@ const LoginPage = () => {
             <div className="text-red-500 text-sm">{passowrdError}</div>
           </div>
           <div className="flex gap-10 text-gray-500 items-center mt-2">
-            <div>
-              <TextField type="checkbox" onClick={() => setShowPassword((prev) => !prev)} />
-              Show password
+            <div className="flex gap-1">
+              <TextField type="checkbox" className=""  onClick={() => setShowPassword((prev) => !prev)} />
+              Show Password
             </div>
             <a href="">Forget Password?</a>
           </div>

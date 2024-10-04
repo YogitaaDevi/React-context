@@ -15,17 +15,26 @@ const CartCard = ({ item }: CartCardProps) => {
     return price * count;
   }, [item.price, item.count])
 
+  const handleAddCart = useCallback((item: ProductType) => {
+    if(item.quantity === 0) {
+      alert("Out of stock")
+    }
+    else{
+      handleIncrement(item)
+    }
+  }, [])
+
   const handleOrder = useMemo(() => (
     order.length === 0 ?
       <>
         <Button className="bg-slate-300 focus:ring-slate-500" name="-" onClick={() => handleDecrement(item)} variant="SECONDARY" size="sm" />
         {item.count}
-        <Button className="bg-slate-300 focus:ring-slate-500" name="+" onClick={() => handleIncrement(item)} variant="SECONDARY" size="sm" />
+        <Button className="bg-slate-300 focus:ring-slate-500" name="+" onClick={() => handleAddCart(item)} variant="SECONDARY" size="sm" />
       </> : <> X{item.count} </>
   ), [order, item.count])
 
   return (
-    <div className="w-full flex items-center gap-5 h-26 border-b-2">
+    <div className="w-full p-2 flex items-center gap-5 h-26">
       <div className="w-28 flex h-24">
         <img src={item.image} alt="userImage" className="h-22 w-28" />
       </div>

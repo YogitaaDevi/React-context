@@ -15,7 +15,7 @@ const EmptyPage = () => {
   ), [isPayment, isOrder]);
 
   return (
-    <div className="text-2xl font-bold">
+    <div className="text-2xl font-bold flex flex-col items-center w-full">
       <img src={oopsImage} className="h-72" alt="Oops!" />
       {message}
     </div>

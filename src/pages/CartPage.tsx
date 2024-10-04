@@ -37,7 +37,7 @@ const CartPage = () => {
     <>
       {(cart.length === 0 && order.length === 0) ? <EmptyPage /> :
         <>
-          <div className="flex flex-col items-center h-96 overflow-y-auto">
+          <div className="flex flex-col items-center h-72 overflow-y-auto border shadow justify-center">
             {cart.length !== 0 ? cart.map((item) => <CartCard item={item} key={item.id} />) : order.map((item) => <CartCard item={item} key={item.id} />)}
           </div>
           <div className="w-96 h-48 shadow border rounded-lg font-semibold text-lg">
@@ -69,7 +69,7 @@ const CartPage = () => {
       <div className="flex">
         {renderTitle}
       </div>
-      <div className="flex gap-24 items-center">
+      <div className="flex gap-24 justify-center items-center">
         {renderCart}
       </div>
     </div>
