@@ -18,8 +18,8 @@ const LoginPage = () => {
   const user = useMemo(() =>
     users.find((data) => data.name === name && data.password === password), [name, password]);
 
-  const handleSubmit = useCallback(() => {
-
+  const handleSubmit = useCallback((event: any) => {
+    event?.preventDefault()
     if (name === "" && password === "") {
       setNameError("Username is required*");
       setPasswordError("Password is required*");
@@ -54,7 +54,7 @@ const LoginPage = () => {
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center">
-      <div className="w-98 border flex flex-col gap-5 shadow rounded-lg bg-slate-200">
+      <form className="w-98 border flex flex-col gap-5 shadow rounded-lg bg-slate-200" onSubmit={handleSubmit}>
         <div className="text-2xl font-bold flex h-20 items-center justify-center">Login</div>
         <div className="h-full flex flex-col items-center">
           <div className="mb-8">
@@ -72,9 +72,9 @@ const LoginPage = () => {
             </div>
             <a href="">Forget Password?</a>
           </div>
-          <Button className="bg-slate-700 hover:bg-slate-500 mt-10" name="Submit" onClick={handleSubmit} size="lg"/>
+          <Button className="bg-slate-700 hover:bg-slate-500 mt-10" name="Submit" size="lg"/>
         </div>
-      </div>
+      </form>
     </div>
   )
 }

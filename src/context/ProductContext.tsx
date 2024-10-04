@@ -1,19 +1,20 @@
-import { createContext, useCallback, useEffect, useMemo, useState } from "react";
+import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import { ProductType } from "../types/ProductType";
 import products from "../data/Products";
 
 interface ProductContextProps {
-  children: any;
+  children: ReactNode;
 }
 
 const ProductContextValue = {
   count: 0,
-  product: [{ id: 0, name: "", price: 0, image: "", count: 0 }],
-  cart: [{ id: 0, name: "", price: 0, image: "", count: 0 }],
-  order: [{ id: 0, name: "", price: 0, image: "", count: 0 }],
+  product: [{ id: 0, name: "", price: 0, image: "", count: 0, quantity: 0 }],
+  cart: [{ id: 0, name: "", price: 0, image: "", count: 0, quantity: 0 }],
+  order: [{ id: 0, name: "", price: 0, image: "", count: 0, quantity: 0 }],
   handleIncrement: (product: ProductType) => { },
   handleDecrement: (product: ProductType) => { },
   totalCost: 0,
+  totalCostWithGst: 0,
   showOrderButton: () => { },
   hideOrderButton: () => { },
   isOrder: false,
@@ -29,6 +30,7 @@ const ProductContext = ({ children }: ProductContextProps) => {
   const [order, setOrder] = useState<ProductType[]>([]);
   const [count, setCount] = useState<number>(0);
   const [totalCost, setTotalCost] = useState<number>(0);
+  const [totalCostWithGst, setTotalCostWithGst] = useState<number>(0);
   const [isOrder, setIsOrder] = useState<boolean>(false);
   const [isPayment, setIsPayment] = useState<boolean>(false);
 
@@ -65,7 +67,7 @@ const ProductContext = ({ children }: ProductContextProps) => {
       setCount((prev: number) => prev + 1);
       setCart((prev: ProductType[]) => [...prev, product]);
     }
-  }, [cart]);
+  }, [product]);
 
   const handleDecrement = useCallback((product: ProductType) => {
     if (product && product.count > 0) {
@@ -76,18 +78,20 @@ const ProductContext = ({ children }: ProductContextProps) => {
         setCart((prev: ProductType[]) => prev.filter((item) => item.id !== product.id));
       }
     }
-  }, [cart]);
+  }, [product]);
 
   const handleTotalCount = (itemCost: number, itemGst: number) => {
-    setTotalCost((prevTotal) => prevTotal + itemCost + itemGst);
+    setTotalCost((prev) => prev + itemCost);
+    setTotalCostWithGst((prev) => prev + itemCost + itemGst);
   };
 
   useEffect(() => {
     setTotalCost(0);
+    setTotalCostWithGst(0);
     if (cart.length !== 0) {
       cart.forEach((item) => {
-        const itemGst = (item.price * item.count) * 0.18;
         const itemTotalCost = item.price * item.count;
+        const itemGst = itemTotalCost * 0.18;
         handleTotalCount(itemTotalCost, itemGst);
       });
     }
@@ -102,10 +106,10 @@ const ProductContext = ({ children }: ProductContextProps) => {
 
   const contextValue = useMemo(() =>
   ({
-    count, handleIncrement, handleDecrement, product, cart, totalCost, hideOrderButton, showOrderButton, isOrder, paymentSuccess, isPayment, order
+    count, handleIncrement, handleDecrement, product, cart, totalCost, totalCostWithGst, hideOrderButton, showOrderButton, isOrder, paymentSuccess, isPayment, order
   }),
     [
-      count, handleIncrement, handleDecrement, product, cart, totalCost, hideOrderButton, showOrderButton, isOrder, paymentSuccess, isPayment, order
+      count, handleIncrement, handleDecrement, product, cart, totalCost, totalCostWithGst, hideOrderButton, showOrderButton, isOrder, paymentSuccess, isPayment, order
     ]);
 
   return (

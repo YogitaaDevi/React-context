@@ -14,13 +14,13 @@ const Header = () => {
 
   useEffect(() => {
     if(hours >= 4 && hours < 12) 
-      setGreeting("Good morning -")
+      setGreeting("Morning Cravings? -")
     else if (hours >= 12 && hours < 16) 
-      setGreeting("Good afternoon -")
+      setGreeting("Afternoon Cravings? -")
     else if (hours >= 16 && hours < 22 )
-      setGreeting("Good evening -")
+      setGreeting("Evening Cravings? -")
     else
-      setGreeting("Night Carvings? -")
+      setGreeting("Night Cravings? -")
     }, [hours])
 
     const handleUser = () => {

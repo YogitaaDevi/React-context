@@ -18,19 +18,19 @@ const CartCard = ({ item }: CartCardProps) => {
   const handleOrder = useMemo(() => (
     order.length === 0 ?
       <>
-        <Button className="bg-red-500 focus:ring-red-700" name="-" onClick={() => handleDecrement(item)} variant="SECONDARY" size="sm" />
+        <Button className="bg-slate-300 focus:ring-slate-500" name="-" onClick={() => handleDecrement(item)} variant="SECONDARY" size="sm" />
         {item.count}
-        <Button className=" bg-green-500 focus:ring-green-700" name="+" onClick={() => handleIncrement(item)} variant="SECONDARY" size="sm" />
+        <Button className="bg-slate-300 focus:ring-slate-500" name="+" onClick={() => handleIncrement(item)} variant="SECONDARY" size="sm" />
       </> : <> X{item.count} </>
   ), [order, item.count])
 
   return (
-    <div className="w-full flex items-center gap-5 h-24 border-b">
-      <div className="w-28 flex justify-center">
-        <img src={item.image} alt="userImage" className="h-20 w-24" />
+    <div className="w-full flex items-center gap-5 h-26 border-b-2">
+      <div className="w-28 flex h-24">
+        <img src={item.image} alt="userImage" className="h-22 w-28" />
       </div>
-      <div className="w-56 flex flex-col font-bold justify-center items-center">
-        <div className="text-2xl">{item.name}</div>
+      <div className="w-56 flex flex-col font-semibold justify-center items-center">
+        <div className="text-xl">{item.name}</div>
         Rs.{item.price}
       </div>
       <div className="w-40 flex justify-center gap-4 text-lg items-center font-semibold">

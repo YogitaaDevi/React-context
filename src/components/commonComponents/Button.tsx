@@ -3,7 +3,7 @@ import "../../assets/scss/Button.scss"
 interface ButtonProps {
     className?: string,
     name: string,
-    onClick:()=> void,
+    onClick?:()=> void,
     variant?: "PRIMARY" | "SECONDARY",
     size?: "sm" | "lg" | "md"
 }

@@ -29,7 +29,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <img src={product.image} alt="userImage" className="h-40 w-40" />
       </div>
       <div className="flex flex-col items-center justify-center gap-1">
-        <div className="text-xl font-bold">{product.name}</div>
+        <div className="text-xl font-semibold">{product.name}</div>
         <div className="text-lg">
           Rs.{product.price}
         </div>
@@ -38,9 +38,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
       {!isAdd && <Button className="bg-blue-500 hover:bg-blue-700" name="Add to Cart" onClick={handleAddCart} size="lg" />}
       </div>  
       {isAdd && <div className="flex items-center justify-center gap-5">
-        <Button className="bg-red-500 focus:ring-red-700" name="-" onClick={() => handleDecrement(product)} variant="SECONDARY" size="sm" />
+        <Button className="bg-slate-300 focus:ring-slate-500" name="-" onClick={() => handleDecrement(product)} variant="SECONDARY" size="sm" />
         {handleRemoveCart()}
-        <Button className="bg-green-500 focus:ring-green-700" name="+" onClick={() => handleIncrement(product)} variant="SECONDARY" size="sm" />
+        <Button className="bg-slate-300 focus:ring-slate-500" name="+" onClick={() => handleIncrement(product)} variant="SECONDARY" size="sm" />
       </div>}
     </div>
   )

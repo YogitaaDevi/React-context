@@ -14,12 +14,10 @@ const OrderPage = () => {
     return (
       <>
         {isPayment ?
-          <div className="flex flex-col w-full gap-5 border-2">
-            <div className="flex">
-              <div className="flex w-1/2 justify-center">
+          <div className="flex flex-col w-full gap-5 border-b-2">
+            <div className="flex justify-center w-full">
                 <img src={servingChef} alt="" className="w-80" />
-              </div>
-              <div className="flex w-2/6">
+              <div className="flex w-5/6">
                 <CartPage />
               </div>
             </div>
@@ -32,7 +30,7 @@ const OrderPage = () => {
 
   return (
     <>
-      <div className="w-full flex flex-col gap-10 items-center">
+      <div className="w-full flex flex-col gap-5 items-center">
         {renderedOrder}
         <div className="">
           <Button className="bg-red-500" name="Back" onClick={() => navigate(-1)} variant="SECONDARY" />

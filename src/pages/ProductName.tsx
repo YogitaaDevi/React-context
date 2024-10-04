@@ -7,7 +7,7 @@ const ProductName = () => {
           <img src={chef} className="h-20 w-20" />
           <div className="text-5xl font-bold">
             KaLa's Kitchen
-            <div className="text-lg">
+            <div className="text-lg font-semibold">
               An Indian Cuisine Restaurent
             </div>
           </div>

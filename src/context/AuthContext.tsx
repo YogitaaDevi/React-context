@@ -1,8 +1,8 @@
-import { createContext, useState, useCallback, useMemo } from "react";
+import { createContext, useState, useCallback, useMemo, ReactNode } from "react";
 import { UserType } from "../types/UserType";
 
 interface AuthContextProps {
-  children: any;
+  children: ReactNode;
 }
 
 const AuthContextValue = {
