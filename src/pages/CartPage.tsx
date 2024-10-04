@@ -5,6 +5,7 @@ import EmptyPage from "./EmptyPage"
 import Button from "../components/commonComponents/Button"
 import { useNavigate } from "react-router-dom"
 import "../assets/scss/CartPage.scss"
+import { PAYMENT, PRODUCT } from "../constants/constants"
 const CartPage = () => {
 
   const { cart, totalCost, paymentSuccess, order, totalCostWithGst } = useContext(ProductContextProvider)
@@ -12,14 +13,14 @@ const CartPage = () => {
 
   const handlePayment = () => {
     paymentSuccess();
-    navigate("/home/payment")
+    navigate(PAYMENT)
   }
 
   const renderTitle = useMemo(() => (
     <div className="h-24 flex gap-10">
       {order.length === 0 && (
         <div className="w-48 flex justify-center items-center btn-back">
-          <Button className="bg-red-500 focus:ring-red-700" name="Back" onClick={() => navigate("/home/product")} variant="SECONDARY" />
+          <Button className="bg-red-500 focus:ring-red-700" name="Back" onClick={() => navigate(PRODUCT)} variant="SECONDARY" />
         </div>
       )}
       <div className="card-title flex justify-center items-center text-4xl font-bold">
@@ -31,7 +32,7 @@ const CartPage = () => {
         </div>
       )}
     </div>
-  ), [order])
+  ), [order, cart])
 
   const renderCart = useMemo(() => (
     <>

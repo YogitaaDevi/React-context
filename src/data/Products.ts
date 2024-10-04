@@ -17,7 +17,6 @@ const products: ProductType[] = [
     { id: 6, image: briyani2, name: "Chicken Briyani", price: 250, count:0, quantity: 5  },
     { id: 7, image: chicken, name: "Chicken 65", price: 150, count:0, quantity: 5  },
     { id: 8, image: juice, name: "Lemon Juice", price: 60, count:0, quantity: 5  }
-
 ]
 
 export default products

@@ -11,10 +11,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const { handleIncrement, handleDecrement } = useContext(ProductContextProvider)
   const [isAdd, setIsAdd] = useState<boolean>(false);
 
-  const handleAddCart = useCallback(() => {
+  const handleAddCart = () => {
     setIsAdd((prev: boolean) => !prev)
     handleIncrement(product)
-  }, [isAdd])
+  }
 
   const handleRemoveCart = useCallback(() => {
     if (product.count === 0)

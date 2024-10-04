@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { ProductType } from "../../types/ProductType"
 import { ProductContextProvider } from "../../context/ProductContext";
 import Button from "../commonComponents/Button";
@@ -11,18 +11,18 @@ const CartCard = ({ item }: CartCardProps) => {
 
   const { handleDecrement, handleIncrement, order } = useContext(ProductContextProvider)
 
-  const handleItemCost = useCallback((price: number, count: number) => {
-    return price * count;
+  const handleItemCost = useMemo(() => {
+    return item.price * item.count;
   }, [item.price, item.count])
 
-  const handleAddCart = useCallback((item: ProductType) => {
-    if(item.quantity === 0) {
+  const handleAddCart = (item: ProductType) => {
+    if (item.quantity === 0) {
       alert("Out of stock")
     }
-    else{
+    else {
       handleIncrement(item)
     }
-  }, [])
+  }
 
   const handleOrder = useMemo(() => (
     order.length === 0 ?
@@ -34,7 +34,7 @@ const CartCard = ({ item }: CartCardProps) => {
   ), [order, item.count])
 
   return (
-    <div className="w-full p-2 flex items-center gap-5 h-26">
+    <div className="w-full p-2 flex items-center gap-5 h-26 border-b-2">
       <div className="w-28 flex h-24">
         <img src={item.image} alt="userImage" className="h-22 w-28" />
       </div>
@@ -48,7 +48,7 @@ const CartCard = ({ item }: CartCardProps) => {
       <div className="flex justify-center items-center gap-10 text-xl">
         =
         <div className="font-bold text-xl">
-          {handleItemCost(item.price, item.count)}
+          {handleItemCost}
         </div>
       </div>
     </div>

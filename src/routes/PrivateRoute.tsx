@@ -1,17 +1,15 @@
-import { useContext, useMemo } from "react"
+import { useContext } from "react"
 import { AuthContextProvider } from "../context/AuthContext"
 import { Navigate, Outlet } from "react-router-dom"
+import { LOGIN } from "../constants/constants"
 
 const PrivateRoute = () => {
 
   const { isAuthenticated } = useContext(AuthContextProvider)
 
-  const handleAuthentication = useMemo(() => (
-    !isAuthenticated ? <Navigate to="login" replace /> : <Outlet />
-  ), [isAuthenticated])
   return (
     <>
-      {handleAuthentication}
+    {!isAuthenticated ? <Navigate to={LOGIN} replace /> : <Outlet />}
     </>
   )
 }

@@ -4,13 +4,11 @@ import ProductsList from "./ProductPage"
 
 const ProductDisplayPage = () => {
   return (
-    <>
     <div className="flex flex-col gap-3 items-center">
-    <ProductName/>
-    <ProductFilter/>
-    <ProductsList/>
+      <ProductName />
+      <ProductFilter />
+      <ProductsList />
     </div>
-    </>
   )
 }
 

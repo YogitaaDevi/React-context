@@ -39,25 +39,27 @@ const ProductContext = ({ children }: ProductContextProps) => {
   const [isPayment, setIsPayment] = useState<boolean>(false);
   const [isSearch, setIsSearch] = useState<boolean>(false);
 
+
+
   const findCartProduct = (cart: ProductType[], product: ProductType) => {
     return cart.find((data) => data.id === product.id);
   };
 
-  const showOrderButton = useCallback(() => {
+  const showOrderButton = () => {
     setIsOrder(true);
-  }, []);
+  };
 
-  const hideOrderButton = useCallback(() => {
+  const hideOrderButton = () => {
     setIsOrder(false);
-  }, []);
+  };
 
-  const paymentSuccess = useCallback(() => {
+  const paymentSuccess = () => {
     setIsPayment((prev: boolean) => !prev);
     setCount(0);
     setOrder(cart)
     setCart([])
     setProduct((prev: any) => prev.map((item: ProductType) => ({ ...item, count: 0 })));
-  }, [cart]);
+  };
 
   const handleProduct = useCallback((product: ProductType) => {
     setProduct((prev: ProductType[]) =>
@@ -71,9 +73,7 @@ const ProductContext = ({ children }: ProductContextProps) => {
       setIsSearch(true)
     else
       setIsSearch(false)
-  }, [isSearch, searchData])
-  console.log(isSearch)
-  console.log(searchData)
+  }, [])
 
   const handleIncrement = useCallback((product: ProductType) => {
     product.count += 1;

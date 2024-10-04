@@ -4,6 +4,7 @@ import Button from "../components/commonComponents/Button";
 import { useNavigate } from "react-router-dom";
 import { AuthContextProvider } from "../context/AuthContext";
 import { users } from "../data/Users";
+import { HOME } from "../constants/constants";
 
 const LoginPage = () => {
 
@@ -48,7 +49,7 @@ const LoginPage = () => {
       setNameError("");
       setPasswordError("");
       handleLogin(user);
-      navigate("/home", { replace: true });
+      navigate(HOME, { replace: true });
     }
   }, [name, password, user]);
 

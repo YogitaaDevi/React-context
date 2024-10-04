@@ -11,23 +11,24 @@ import UserPage from "../pages/UserPage"
 import PaymentSuccessPage from "../pages/PaymentSuccessPage"
 import OrderPage from "../pages/OrderPage"
 import ProfilePage from "../pages/ProfilePage"
+import {LOGIN, HOME, USER, USERORDER, USERPROFILE, PAYMENT, CART, PRODUCT} from "../constants/constants"
 
 const AppRoutes = () => {
 
   return (
     <Routes>
       <Route element={<MainLayout />}>
-        <Route path="/login" element={<LoginPage />} />
-        <Route index element={<Navigate to="/login" replace />} />
+        <Route path={LOGIN} element={<LoginPage />} />
+        <Route index element={<Navigate to={LOGIN} replace />} />
         <Route element={<PrivateRoute />}>
           <Route element={<AppLayout />}>
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/home/product" element={<ProductDisplayPage />} />
-            <Route path="/home/cart" element={<CartPage />} />
-            <Route path="/home/user" element={<UserPage/>}/>
-            <Route path="/home/user/profile" element={<ProfilePage/>}/>
-            <Route path="/home/user/order" element={<OrderPage />} />
-            <Route path="/home/payment" element={<PaymentSuccessPage/>}/>
+            <Route path={HOME} element={<HomePage />} />
+            <Route path={PRODUCT} element={<ProductDisplayPage />} />
+            <Route path={CART} element={<CartPage />} />
+            <Route path={USER} element={<UserPage/>}/>
+            <Route path={USERPROFILE} element={<ProfilePage/>}/>
+            <Route path={USERORDER} element={<OrderPage />} />
+            <Route path={PAYMENT} element={<PaymentSuccessPage/>}/>
           </Route>
         </Route>
       </Route>

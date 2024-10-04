@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import { ProductContextProvider } from "../../context/ProductContext"
 import { useNavigate } from "react-router-dom"
 import { AuthContextProvider } from "../../context/AuthContext"
+import {USER, PAYMENT, CART} from "../../constants/constants"
 
 const Header = () => {
 
@@ -24,16 +25,16 @@ const Header = () => {
     }, [hours])
 
     const handleUser = () => {
-      navigate("/home/user")
+      navigate(USER)
       hideOrderButton()
     }
 
     const handleCart = () => {
       if(isPayment) {
-        navigate("/home/payment")
+        navigate(PAYMENT)
       }
       else {
-        navigate("/home/cart")
+        navigate(CART)
         showOrderButton()
       }
     }
