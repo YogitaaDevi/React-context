@@ -3,11 +3,13 @@ import Button from "../components/commonComponents/Button"
 import { useNavigate } from "react-router-dom"
 import { AuthContextProvider } from "../context/AuthContext"
 import { USER, USERORDER } from "../constants/constants"
+import ProfileCard from "../components/appComponents/ProfileCard"
 
 const ProfilePage = () => {
   const navigate = useNavigate()
   const { user } = useContext(AuthContextProvider)
-
+  const userValue = [{key: "Username", value: user.name},  {key: "Email id", value: user.mail },
+     {key: "Contact", value: user.contact }, {key: "Location", value: user.location } ]
   return (
     <div className="w-full flex flex-col items-center pt-5 gap-6">
       <div className="w-3/6 h-96 border-2 flex flex-col items-center gap-4 bg-slate-200 rounded">
@@ -16,38 +18,7 @@ const ProfilePage = () => {
           <img src={user.image} className="w-32 h-32 rounded-full" />
         </div>
         <div className="flex flex-col">
-          <div className="w-64 h-8 flex">
-            <div className="w-36 font-bold text-xl">
-              Username:
-            </div>
-            <div className="text-lg">
-              {user.name}
-            </div>
-          </div>
-          <div className="w-64 h-8 flex">
-            <div className="w-36 font-bold text-xl">
-              Email id:
-            </div>
-            <div className="text-lg">
-              {user.mail}
-            </div>
-          </div>
-          <div className="w-64 h-8 flex">
-            <div className="w-36 font-bold text-xl">
-              Contact:
-            </div>
-            <div className="text-lg">
-              {user.contact}
-            </div>
-          </div>
-          <div className="w-64 h-8 flex">
-            <div className="w-36 font-bold text-xl">
-              Location:
-            </div>
-            <div className="text-lg">
-              {user.location}
-            </div>
-          </div>
+          {userValue.map((data) => <ProfileCard data ={data} /> )}
         </div>
         <div className="text-lg font-bold">
           If you face any issues, contact: kalakitchen@gmail.com
