@@ -9,10 +9,9 @@ import { HOME } from "../constants/constants";
 const LoginPage = () => {
 
   const [name, setName] = useState<string>("")
-  const [nameError, setNameError] = useState<string>("");
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("")
-  const [passowrdError, setPasswordError] = useState<string>("")
+  const [error, setError] = useState({name: "", password: ""});
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
   const { handleLogin } = useContext(AuthContextProvider)
 
@@ -22,32 +21,25 @@ const LoginPage = () => {
   const handleSubmit = useCallback((event: any) => {
     event?.preventDefault()
     if (name === "" && password === "") {
-      setNameError("Username is required*");
-      setPasswordError("Password is required*");
+      setError((prev) => prev = { name: "Username is required*", password: "Password is required*"})
     } 
     else if (name === "") {
-      setNameError("Username is required*");
-      setPasswordError("");
+      setError((prev) => prev = {name: "Username is required*", password: ""})
     } 
     else if (name === "null") {
-      setNameError("Provide valid username*");
-      setPasswordError("");
+      setError((prev) => prev = {name: "Provide valid username*", password: ""})
     } 
     else if (password === "") {
-      setPasswordError("Password is required*");
-      setNameError("");
+      setError((prev) => prev =  {name: "", password: "Password is required*"})
     } 
     else if (password.length < 6 || password.length > 8) {
-      setPasswordError("Password must be 6 to 8 characters*");
-      setNameError("");
+      setError((prev) => prev =  {name: "", password: "Password must be 6 to 8 characters*"})
     } 
     else if (!user) {
-      setNameError("");
-      setPasswordError("Username or Password is incorrect*");
+      setError((prev) => prev =  {name: "", password: "Username or Password is incorrect*"})
     } 
     else {
-      setNameError("");
-      setPasswordError("");
+      setError((prev) => prev =  {name: "", password: ""})
       handleLogin(user);
       navigate(HOME, { replace: true });
     }
@@ -60,15 +52,15 @@ const LoginPage = () => {
         <div className="h-full flex flex-col items-center">
           <div className="mb-8">
             <TextField className="border-2 border-white rounded-md h-10 w-72 pl-2 focus:outline-none" type="text" placeholder="Enter your username" onChange={(e: any) => setName(e.target.value)} />
-            <div className="text-red-500 text-sm">{nameError}</div>
+            <div className="text-red-500 text-sm">{error.name}</div>
           </div>
           <div className="mb-3">
             <TextField className="border-2 border-white rounded-md h-10 w-72 pl-2 focus:outline-none" type={showPassword ? "text" : "password"} placeholder="Enter your password" onChange={(e: any) => setPassword(e.target.value)} />
-            <div className="text-red-500 text-sm">{passowrdError}</div>
+            <div className="text-red-500 text-sm">{error.password}</div>
           </div>
           <div className="flex gap-10 text-gray-500 items-center mt-2">
             <div className="flex gap-1">
-              <TextField type="checkbox" className=""  onClick={() => setShowPassword((prev) => !prev)} />
+              <TextField type="checkbox"  onClick={() => setShowPassword((prev) => !prev)} />
               Show Password
             </div>
             <a href="">Forget Password?</a>
