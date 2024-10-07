@@ -4,7 +4,7 @@ import EmptyPage from "./EmptyPage"
 import Button from "../components/commonComponents/Button"
 import { useNavigate } from "react-router-dom"
 import "../assets/scss/CartPage.scss"
-import { PAYMENT, PRODUCT } from "../constants/constants"
+import { PAYMENT, PRODUCT } from "../utils/constants"
 import TotalCostCart from "../components/appComponents/TotalCostCart"
 const CartPage = () => {
 

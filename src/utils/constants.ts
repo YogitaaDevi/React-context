@@ -1,0 +1,8 @@
+export const LOGIN: string = "/login"
+export const HOME: string = "/home"
+export const PRODUCT: string = "/home/product"
+export const CART: string = "/home/cart"
+export const PAYMENT: string = "/home/payment"
+export const USER: string = "/home/user"
+export const USERPROFILE: string = "/home/user/profile"
+export const USERORDER: string = "/home/user/order"

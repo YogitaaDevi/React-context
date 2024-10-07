@@ -2,7 +2,7 @@ import { useContext } from "react"
 import Button from "../components/commonComponents/Button"
 import { useNavigate } from "react-router-dom"
 import { AuthContextProvider } from "../context/AuthContext"
-import { USER, USERORDER } from "../constants/constants"
+import { USER, USERORDER } from "../utils/constants"
 import ProfileCard from "../components/appComponents/ProfileCard"
 
 const ProfilePage = () => {

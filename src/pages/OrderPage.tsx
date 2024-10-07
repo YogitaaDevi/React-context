@@ -4,7 +4,7 @@ import { ProductContextProvider } from "../context/ProductContext"
 import EmptyPage from "./EmptyPage"
 import Button from "../components/commonComponents/Button"
 import { useNavigate } from "react-router-dom"
-import { USER } from "../constants/constants"
+import { USER } from "../utils/constants"
 
 const OrderPage = () => {
   const { isPayment } = useContext(ProductContextProvider)

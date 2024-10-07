@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import chef from "../assets/images/chef-bg.jpg"
 import Button from "../components/commonComponents/Button"
 import "../assets/scss/HomePage.scss"
-import { PRODUCT } from "../constants/constants"
+import { PRODUCT } from "../utils/constants"
 
 const HomePage = () => {
 

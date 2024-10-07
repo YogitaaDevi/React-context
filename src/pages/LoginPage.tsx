@@ -4,7 +4,7 @@ import Button from "../components/commonComponents/Button";
 import { useNavigate } from "react-router-dom";
 import { AuthContextProvider } from "../context/AuthContext";
 import { users } from "../data/Users";
-import { HOME } from "../constants/constants";
+import { HOME } from "../utils/constants";
 
 const LoginPage = () => {
 

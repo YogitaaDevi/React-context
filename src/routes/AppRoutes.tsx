@@ -11,7 +11,7 @@ import UserPage from "../pages/UserPage"
 import PaymentSuccessPage from "../pages/PaymentSuccessPage"
 import OrderPage from "../pages/OrderPage"
 import ProfilePage from "../pages/ProfilePage"
-import {LOGIN, HOME, USER, USERORDER, USERPROFILE, PAYMENT, CART, PRODUCT} from "../constants/constants"
+import {LOGIN, HOME, USER, USERORDER, USERPROFILE, PAYMENT, CART, PRODUCT} from "../utils/constants"
 
 const AppRoutes = () => {
 

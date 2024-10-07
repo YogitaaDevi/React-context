@@ -106,11 +106,18 @@ const ProductContext = ({ children }: ProductContextProps) => {
     setTotalCost(0);
     setTotalCostWithGst(0);
     if (cart.length !== 0) {
-      cart.forEach((item) => {
-        const itemTotalCost = item.price * item.count;
-        const itemGst = itemTotalCost * 0.18;
-        handleTotalCount(itemTotalCost, itemGst);
-      });
+      const { total, totalWithGst } = cart.reduce(
+        (acc, item) => {
+          const itemTotalCost = item.price * item.count;
+          const itemGst = itemTotalCost * 0.18;
+          acc.total += itemTotalCost;
+          acc.totalWithGst += itemTotalCost + itemGst;
+          return acc;
+        },
+        { total: 0, totalWithGst: 0 }
+      );
+      setTotalCost(total);
+      setTotalCostWithGst(totalWithGst);
     }
     else {
       order.forEach((item) => {

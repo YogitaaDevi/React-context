@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import { ProductContextProvider } from "../../context/ProductContext"
 import { useNavigate } from "react-router-dom"
 import { AuthContextProvider } from "../../context/AuthContext"
-import {USER, PAYMENT, CART} from "../../constants/constants"
+import {USER, PAYMENT, CART} from "../../utils/constants"
 
 const Header = () => {
 

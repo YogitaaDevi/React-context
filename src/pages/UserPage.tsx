@@ -4,7 +4,7 @@ import smiley from "../assets/images/smiley.png"
 import Button from "../components/commonComponents/Button"
 
 import { useNavigate } from "react-router-dom"
-import { PRODUCT, USERORDER, USERPROFILE } from "../constants/constants"
+import { PRODUCT, USERORDER, USERPROFILE } from "../utils/constants"
 
 const UserPage = () => {
   const { user } = useContext(AuthContextProvider)

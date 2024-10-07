@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import success from "../assets/images/success.jpg"
 import Button from "../components/commonComponents/Button"
-import { PRODUCT } from "../constants/constants"
+import { PRODUCT } from "../utils/constants"
 
 const PaymentSuccessPage = () => {
 

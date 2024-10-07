@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { AuthContextProvider } from "../context/AuthContext"
 import { Navigate, Outlet } from "react-router-dom"
-import { LOGIN } from "../constants/constants"
+import { LOGIN } from "../utils/constants"
 
 const PrivateRoute = () => {
 
