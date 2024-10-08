@@ -21,15 +21,12 @@ const ProductContextValue = {
   isOrder: false,
   paymentSuccess: () => { },
   isPayment: false,
-  searchData: [{ id: 0, name: "", price: 0, image: "", count: 0, quantity: 0 }],
-  isSearch: false
 };
 
 export const ProductContextProvider = createContext(ProductContextValue);
 
 const ProductContext = ({ children }: ProductContextProps) => {
   const [product, setProduct] = useState<ProductType[]>(products);
-  const [searchData, setSearchData] = useState<ProductType[]>([]);
   const [cart, setCart] = useState<ProductType[]>([]);
   const [order, setOrder] = useState<ProductType[]>([]);
   const [count, setCount] = useState<number>(0);
@@ -37,9 +34,6 @@ const ProductContext = ({ children }: ProductContextProps) => {
   const [totalCostWithGst, setTotalCostWithGst] = useState<number>(0);
   const [isOrder, setIsOrder] = useState<boolean>(false);
   const [isPayment, setIsPayment] = useState<boolean>(false);
-  const [isSearch, setIsSearch] = useState<boolean>(false);
-
-
 
   const findCartProduct = (cart: ProductType[], product: ProductType) => {
     return cart.find((data) => data.id === product.id);
@@ -61,18 +55,19 @@ const ProductContext = ({ children }: ProductContextProps) => {
     setProduct((prev: any) => prev.map((item: ProductType) => ({ ...item, count: 0 })));
   };
 
-  const handleProduct = useCallback((product: ProductType) => {
+  const handleProduct = (product: ProductType) => {
     setProduct((prev: ProductType[]) =>
       prev.map((data) => (data.id === product.id ? product : data))
-    );
-  }, []);
+    )
+  };
 
   const handleSearchProduct = useCallback((items: ProductType[]) => {
-    setSearchData(items)
-    if (items.length)
-      setIsSearch(true)
-    else
-      setIsSearch(false)
+    if (items.length) {
+      setProduct(items)
+    }
+    else {
+      setProduct(products)
+    }
   }, [])
 
   const handleIncrement = useCallback((product: ProductType) => {
@@ -130,10 +125,10 @@ const ProductContext = ({ children }: ProductContextProps) => {
 
   const contextValue = useMemo(() =>
   ({
-    count, handleIncrement, searchData, isSearch, handleDecrement, product, cart, totalCost, totalCostWithGst, hideOrderButton, showOrderButton, isOrder, paymentSuccess, isPayment, order, handleSearchProduct
+    count, handleIncrement, handleDecrement, product, cart, totalCost, totalCostWithGst, hideOrderButton, showOrderButton, isOrder, paymentSuccess, isPayment, order, handleSearchProduct
   }),
     [
-      count, handleIncrement, searchData, isSearch, handleDecrement, product, cart, totalCost, totalCostWithGst, hideOrderButton, showOrderButton, isOrder, paymentSuccess, isPayment, order, handleSearchProduct
+      count, handleIncrement, handleDecrement, product, cart, totalCost, totalCostWithGst, hideOrderButton, showOrderButton, isOrder, paymentSuccess, isPayment, order, handleSearchProduct
     ]);
 
   return (
