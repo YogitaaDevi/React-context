@@ -2,20 +2,20 @@ import { useCallback, useContext, useState } from "react"
 import { ProductType } from "../../types/ProductType"
 import Button from "../commonComponents/Button"
 import { ProductContextProvider } from "../../context/ProductContext"
+import { productAction } from "../../enum/action"
 
 interface ProductCardProps {
   product: ProductType
 }
 const ProductCard = ({ product }: ProductCardProps) => {
 
-  const { handleIncrement, handleDecrement } = useContext(ProductContextProvider)
+  const { dispatch } = useContext(ProductContextProvider)
   const [isAdd, setIsAdd] = useState<boolean>(false);
 
   const handleAddCart = () => {
-    setIsAdd((prev: boolean) => !prev)
-    handleIncrement(product)
+    setIsAdd(() => true)
+    dispatch({type: productAction.ADD_TO_CART, payload: product})
   }
-
   const handleRemoveCart = useCallback(() => {
     if (product.count === 0)
       setIsAdd(() => false)
@@ -38,9 +38,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
         {!isAdd && <Button className="bg-blue-500 hover:bg-blue-700" name="Add to Cart" onClick={handleAddCart} size="lg" />}
       </div>
       {isAdd && <div className="flex items-center justify-center gap-5">
-        <Button className="bg-slate-300 focus:ring-slate-500" name="-" onClick={() => handleDecrement(product)} variant="SECONDARY" size="sm" />
+        <Button className="bg-slate-300 focus:ring-slate-500" name="-" onClick={() => dispatch({type: productAction.REMOVE_FROM_CART, payload: product})} variant="SECONDARY" size="sm" />
         {handleRemoveCart()}
-        <Button className="bg-slate-300 focus:ring-slate-500" name="+" onClick={() => handleIncrement(product)} variant="SECONDARY" size="sm" />
+        <Button className="bg-slate-300 focus:ring-slate-500" name="+" onClick={() => dispatch({type: productAction.ADD_TO_CART, payload: product})} variant="SECONDARY" size="sm" />
       </div>}
       {product.quantity === 0 &&
         <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"

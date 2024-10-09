@@ -4,22 +4,24 @@ import { Icons, IconType } from '../components/commonComponents/Icons'
 import { useContext, useEffect, useState } from 'react'
 import { ProductContextProvider } from '../context/ProductContext'
 import { ProductType } from '../types/ProductType'
+import { productAction } from '../enum/action'
 
 const ProductFilter = () => {
 
   const [search, setSearch] = useState<string>("")
-  const { product, handleSearchProduct } = useContext(ProductContextProvider)
+  const { currentState, dispatch } = useContext(ProductContextProvider)
   let searchedData: ProductType[]
 
   useEffect(() => {
     if (search.length) {
-      searchedData = product.filter((data: ProductType) =>
+      searchedData = currentState.product.filter((data: ProductType) =>
         data.name.toLowerCase().includes(search.toLowerCase()))
     }
-    if (searchedData)
-      handleSearchProduct(searchedData)
+    if (searchedData) {
+      dispatch({ type: productAction.SEARCH_DATA, payload: searchedData })
+    }
     else
-      handleSearchProduct([])
+      dispatch({ type: productAction.DISPLAY_DATA, payload: []})
   }, [search])
 
   return (

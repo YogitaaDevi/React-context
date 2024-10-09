@@ -2,6 +2,7 @@ import { useContext, useMemo } from "react";
 import { ProductType } from "../../types/ProductType"
 import { ProductContextProvider } from "../../context/ProductContext";
 import Button from "../commonComponents/Button";
+import { productAction } from "../../enum/action";
 
 interface CartCardProps {
   item: ProductType,
@@ -9,7 +10,7 @@ interface CartCardProps {
 
 const CartCard = ({ item }: CartCardProps) => {
 
-  const { handleDecrement, handleIncrement, order } = useContext(ProductContextProvider)
+  const { currentState, dispatch } = useContext(ProductContextProvider)
 
   const handleItemCost = useMemo(() => {
     return item.price * item.count;
@@ -20,18 +21,18 @@ const CartCard = ({ item }: CartCardProps) => {
       alert("Out of stock")
     }
     else {
-      handleIncrement(item)
+      dispatch({type: productAction.ADD_TO_CART, payload: item})
     }
   }
 
   const handleOrder = useMemo(() => (
-    order.length === 0 ?
+    currentState.order.length === 0 ?
       <>
-        <Button className="bg-slate-300 focus:ring-slate-500" name="-" onClick={() => handleDecrement(item)} variant="SECONDARY" size="sm" />
+        <Button className="bg-slate-300 focus:ring-slate-500" name="-" onClick={() => dispatch({type: productAction.REMOVE_FROM_CART, payload: item})} variant="SECONDARY" size="sm" />
         {item.count}
         <Button className="bg-slate-300 focus:ring-slate-500" name="+" onClick={() => handleAddCart(item)} variant="SECONDARY" size="sm" />
       </> : <> X{item.count} </>
-  ), [order, item.count])
+  ), [currentState.order, item.count])
 
   return (
     <div className="w-full p-2 flex items-center gap-5 h-26 border-b-2">

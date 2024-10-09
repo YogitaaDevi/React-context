@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom"
 import { USER } from "../utils/constants"
 
 const OrderPage = () => {
-  const { isPayment } = useContext(ProductContextProvider)
+  const { currentState } = useContext(ProductContextProvider)
   const navigate = useNavigate()
 
   return (
     <div className="w-full flex flex-col gap-10 items-center">
-      {isPayment ?
+      {currentState.isPayment ?
         <div className="flex flex-col w-5/6 gap-5 border-b-2">
           <div className="flex justify-center w-full">
             <CartPage />

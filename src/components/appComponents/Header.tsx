@@ -4,10 +4,11 @@ import { ProductContextProvider } from "../../context/ProductContext"
 import { useNavigate } from "react-router-dom"
 import { AuthContextProvider } from "../../context/AuthContext"
 import {USER, PAYMENT, CART} from "../../utils/constants"
+import { productAction } from "../../enum/action"
 
 const Header = () => {
 
-  const { count, hideOrderButton, showOrderButton, isPayment } = useContext(ProductContextProvider)
+  const { currentState, dispatch } = useContext(ProductContextProvider)
   const { handleLogout, user } = useContext(AuthContextProvider)
   const navigate = useNavigate();
   const [greeting, setGreeting] = useState<string>("");
@@ -26,16 +27,16 @@ const Header = () => {
 
     const handleUser = () => {
       navigate(USER)
-      hideOrderButton()
+      dispatch({type: productAction.SHOW_ORDER})
     }
 
     const handleCart = () => {
-      if(isPayment) {
+      if(currentState.isPayment) {
         navigate(PAYMENT)
       }
       else {
         navigate(CART)
-        showOrderButton()
+        dispatch({type: productAction.SHOW_CART})
       }
     }
 
@@ -55,7 +56,7 @@ const Header = () => {
         </div>
         <div className="flex flex-col gap-1 items-center">
           <div className="ml-1 w-4 h-4 rounded-full bg-red-500 flex justify-center items-center text-sm">
-            {count}
+            {currentState.cart.length}
           </div>
           <div className="-mt-2" onClick={handleCart}><Icons type={IconType.CartIcon} /></div>
         </div>

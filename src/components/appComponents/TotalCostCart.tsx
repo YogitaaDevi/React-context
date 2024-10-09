@@ -3,19 +3,19 @@ import CartCard from "./CartCard"
 import { ProductContextProvider } from "../../context/ProductContext"
 
 const TotalCostCart = () => {
-  const { cart, totalCost, order, totalCostWithGst } = useContext(ProductContextProvider)
+  const { currentState } = useContext(ProductContextProvider)
 
   return (
     <>
       <div className="flex flex-col items-center h-72 overflow-y-auto border shadow justify-center">
-        {cart.length !== 0 ? cart.map((item) => <CartCard item={item} key={item.id} />) : order.map((item) => <CartCard item={item} key={item.id} />)}
+        {currentState.cart.length !== 0 ? currentState.cart.map((item) => <CartCard item={item} key={item.id} />) : currentState.order.map((item) => <CartCard item={item} key={item.id} />)}
       </div>
       <div className="w-96 h-48 shadow border rounded-lg font-semibold text-lg">
         <div className="flex justify-between items-center gap-10 h-16">
           <div className="w-24 ml-10">
             Total Price :
           </div>
-          <div className="w-12 mr-10">{totalCost}</div>
+          <div className="w-12 mr-10">{currentState.cost}</div>
         </div>
         <div className="flex justify-between items-center h-16">
           <div className="w-24 ml-10">
@@ -27,7 +27,7 @@ const TotalCostCart = () => {
           <div className="w-24 ml-10">
             Final Price :
           </div>
-          <div className="w-12 mr-10">{totalCostWithGst}</div>
+          <div className="w-12 mr-10">{currentState.costWithGst}</div>
         </div>
       </div>
     </>

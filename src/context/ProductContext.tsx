@@ -1,107 +1,63 @@
-import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from "react";
+import { createContext, ReactNode, useCallback, useEffect, useMemo, useReducer, useState } from "react";
 import { ProductType } from "../types/ProductType";
 import products from "../data/Products";
+import { productAction } from "../enum/action";
+import { InitialProductState } from "../types/initialProductState";
 
 interface ProductContextProps {
   children: ReactNode;
 }
 
-const ProductContextValue = {
-  count: 0,
-  product: [{ id: 0, name: "", price: 0, image: "", count: 0, quantity: 0 }],
-  cart: [{ id: 0, name: "", price: 0, image: "", count: 0, quantity: 0 }],
-  order: [{ id: 0, name: "", price: 0, image: "", count: 0, quantity: 0 }],
-  handleIncrement: (product: ProductType) => { },
-  handleDecrement: (product: ProductType) => { },
-  handleSearchProduct: (product: ProductType[]) => { },
-  totalCost: 0,
-  totalCostWithGst: 0,
-  showOrderButton: () => { },
-  hideOrderButton: () => { },
-  isOrder: false,
-  paymentSuccess: () => { },
+export interface ActionType {
+  type: productAction,
+  payload?: ProductType[] | ProductType
+}
+
+const initialState: InitialProductState = {
+  product: products,
+  cart: [],
+  order: [],
+  cost: 0,
+  costWithGst: 0,
   isPayment: false,
-};
+  isOrder: false
+}
 
-export const ProductContextProvider = createContext(ProductContextValue);
-
-const ProductContext = ({ children }: ProductContextProps) => {
-  const [product, setProduct] = useState<ProductType[]>(products);
-  const [cart, setCart] = useState<ProductType[]>([]);
-  const [order, setOrder] = useState<ProductType[]>([]);
-  const [count, setCount] = useState<number>(0);
-  const [totalCost, setTotalCost] = useState<number>(0);
-  const [totalCostWithGst, setTotalCostWithGst] = useState<number>(0);
-  const [isOrder, setIsOrder] = useState<boolean>(false);
-  const [isPayment, setIsPayment] = useState<boolean>(false);
-
-  const findCartProduct = (cart: ProductType[], product: ProductType) => {
-    return cart.find((data) => data.id === product.id);
-  };
-
-  const showOrderButton = () => {
-    setIsOrder(true);
-  };
-
-  const hideOrderButton = () => {
-    setIsOrder(false);
-  };
-
-  const paymentSuccess = () => {
-    setIsPayment((prev: boolean) => !prev);
-    setCount(0);
-    setOrder(cart)
-    setCart([])
-    setProduct((prev: any) => prev.map((item: ProductType) => ({ ...item, count: 0 })));
-  };
-
-  const handleProduct = (product: ProductType) => {
-    setProduct((prev: ProductType[]) =>
-      prev.map((data) => (data.id === product.id ? product : data))
-    )
-  };
-
-  const handleSearchProduct = useCallback((items: ProductType[]) => {
-    if (items.length) {
-      setProduct(items)
+const productReducer = (state: InitialProductState, action: ActionType): InitialProductState => {
+  switch (action.type) {
+    case productAction.SEARCH_DATA: {
+      return { ...state, product: action.payload as ProductType[] }
     }
-    else {
-      setProduct(products)
+    case productAction.DISPLAY_DATA: {
+      return { ...state, product: products }
     }
-  }, [])
-
-  const handleIncrement = useCallback((product: ProductType) => {
-    product.count += 1;
-    product.quantity -= 1
-    handleProduct(product);
-    if (!findCartProduct(cart, product)) {
-      setCount((prev: number) => prev + 1);
-      setCart((prev: ProductType[]) => [...prev, product]);
+    case productAction.SHOW_CART: {
+      return { ...state, isOrder: true }
     }
-  }, [product]);
-
-  const handleDecrement = useCallback((product: ProductType) => {
-    if (product && product.count > 0) {
-      product.count -= 1;
-      product.quantity += 1
-      handleProduct(product);
-      if (product.count === 0) {
-        setCount((prev: number) => prev - 1);
-        setCart((prev: ProductType[]) => prev.filter((item) => item.id !== product.id));
-      }
+    case productAction.SHOW_ORDER: {
+      return { ...state, isOrder: false }
     }
-  }, [product]);
-
-  const handleTotalCount = (itemCost: number, itemGst: number) => {
-    setTotalCost((prev) => prev + itemCost);
-    setTotalCostWithGst((prev) => prev + itemCost + itemGst);
-  };
-
-  useEffect(() => {
-    setTotalCost(0);
-    setTotalCostWithGst(0);
-    if (cart.length !== 0) {
-      const { total, totalWithGst } = cart.reduce(
+    case productAction.ADD_TO_CART: {
+      const addToCart = action.payload as ProductType
+      const updatedProduct = state.product.map((prev: ProductType) => prev.id === addToCart.id ? { ...prev, count: prev.count + 1, quantity: prev.quantity - 1 } : prev);
+      const inCart = state.cart.find((item: ProductType) => item.id === addToCart.id);
+      const updatedCart = inCart ? state.cart.map((prev: ProductType) =>
+        prev.id === addToCart.id
+          ? { ...prev, count: prev.count + 1 }
+          : prev
+      )
+        : [...state.cart, { ...addToCart, count: 1 }];
+      return { ...state, product: updatedProduct as ProductType[], cart: updatedCart as ProductType[] };
+    }
+    case productAction.REMOVE_FROM_CART: {
+      const removeFromCart = action.payload as ProductType
+      const updatedProduct = state.product.map((prev: ProductType) => prev.id === removeFromCart.id ? { ...prev, count: prev.count - 1, quantity: prev.quantity + 1 } : prev);
+      const updatedCart = removeFromCart.count - 1 === 0 ?
+        state.cart.filter((prev: ProductType) => prev.id !== removeFromCart.id) : state.cart.map((prev: ProductType) => prev.id === removeFromCart.id ? { ...prev, count: prev.count - 1 } : prev)
+      return { ...state, product: updatedProduct as ProductType[], cart: updatedCart as ProductType[] }
+    }
+    case productAction.TOTAL_CART_COST: {
+      const { total, totalWithGst } = state.cart.reduce(
         (acc, item) => {
           const itemTotalCost = item.price * item.count;
           const itemGst = itemTotalCost * 0.18;
@@ -109,30 +65,55 @@ const ProductContext = ({ children }: ProductContextProps) => {
           acc.totalWithGst += itemTotalCost + itemGst;
           return acc;
         },
-        { total: 0, totalWithGst: 0 }
-      );
-      setTotalCost(total);
-      setTotalCostWithGst(totalWithGst);
+        { total: 0, totalWithGst: 0 })
+      return { ...state, cost: total, costWithGst: totalWithGst }
+    }
+    case productAction.TOTAL_ORDER_COST: {
+      const { total, totalWithGst } = state.order.reduce(
+        (acc, item) => {
+          const itemTotalCost = item.price * item.count;
+          const itemGst = itemTotalCost * 0.18;
+          acc.total += itemTotalCost;
+          acc.totalWithGst += itemTotalCost + itemGst;
+          return acc;
+        },
+        { total: 0, totalWithGst: 0 })
+      return { ...state, cost: total, costWithGst: totalWithGst }
+    }
+    case productAction.RESET_TOTAL_COST: {
+      return { ...state, cost: 0, costWithGst: 0 }
+    }
+    case productAction.PAYMENT: {
+      return { ...state, isPayment: true, order: state.cart, cart: [], product: state.product.map((item) => ({ ...item, count: 0 })) }
+    }
+    default:
+      return state
+  }
+}
+
+const ProductContextValue = {
+  currentState: { product: [{ id: 0, name: "", price: 0, image: "", count: 0, quantity: 0 }], cart: [{ id: 0, name: "", price: 0, image: "", count: 0, quantity: 0 }], order: [{ id: 0, name: "", price: 0, image: "", count: 0, quantity: 0 }], cost: 0, costWithGst: 0, isPayment: false, isOrder: false },
+  dispatch: (value: ActionType) => { },
+};
+
+export const ProductContextProvider = createContext(ProductContextValue);
+
+const ProductContext = ({ children }: ProductContextProps) => {
+  const [currentState, dispatch] = useReducer(productReducer, initialState)
+  console.log(currentState.order);
+
+  useEffect(() => {
+    dispatch({ type: productAction.RESET_TOTAL_COST })
+    if (currentState.cart.length !== 0) {
+      dispatch({ type: productAction.TOTAL_CART_COST, payload: currentState.cart })
     }
     else {
-      order.forEach((item) => {
-        const itemGst = (item.price * item.count) * 0.18;
-        const itemTotalCost = item.price * item.count;
-        handleTotalCount(itemTotalCost, itemGst);
-      });
+      dispatch({ type: productAction.TOTAL_ORDER_COST, payload: currentState.order })
     }
-  }, [cart, handleTotalCount, order]);
-
-  const contextValue = useMemo(() =>
-  ({
-    count, handleIncrement, handleDecrement, product, cart, totalCost, totalCostWithGst, hideOrderButton, showOrderButton, isOrder, paymentSuccess, isPayment, order, handleSearchProduct
-  }),
-    [
-      count, handleIncrement, handleDecrement, product, cart, totalCost, totalCostWithGst, hideOrderButton, showOrderButton, isOrder, paymentSuccess, isPayment, order, handleSearchProduct
-    ]);
+  }, [currentState.cart, currentState.order]);
 
   return (
-    <ProductContextProvider.Provider value={contextValue}>
+    <ProductContextProvider.Provider value={{ currentState, dispatch }}>
       {children}
     </ProductContextProvider.Provider>
   );
