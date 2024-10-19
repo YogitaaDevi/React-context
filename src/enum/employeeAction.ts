@@ -1,0 +1,5 @@
+export enum EmployeeAction {
+    DISPLAY_ALL_EMPLOYEES = "DISPLAY_ALL_EMPLOYEES",
+    CURRENT_PAGE = "CURRENT_PAGE",
+    TOTAL_PAGE = "TOTAL_PAGES"
+}
