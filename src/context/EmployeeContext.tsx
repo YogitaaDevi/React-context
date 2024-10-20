@@ -9,10 +9,7 @@ import { initialEmployeeState } from "../types/initialEmployeeState";
 import { EmployeeAction } from "../enum/employeeAction";
 import { employeeType } from "../types/employeeType";
 import { apiService } from "../services/apiService";
-import { useNavigate } from "react-router-dom";
-import { useColorScheme } from "@mui/material";
 import { AuthContextProvider } from "./AuthContext";
-import { LOGIN } from "../utils/constants";
 
 interface EmployeeContextProps {
   children: ReactNode;
@@ -38,7 +35,7 @@ const employeeReducer = (
     case EmployeeAction.DISPLAY_ALL_EMPLOYEES: {
       return {
         ...state,
-        employee: action.payload as employeeType[],
+        employee: [...state.employee, ...(action.payload as employeeType[])],
       };
     }
     case EmployeeAction.CURRENT_PAGE: {
@@ -52,6 +49,7 @@ const employeeReducer = (
     }
   }
 };
+
 const EmployeeContextValue = {
   currentState: initialState,
   dispatch: (_value: ActionType) => {},
@@ -66,6 +64,7 @@ const EmployeeContext = ({ children }: EmployeeContextProps) => {
   useEffect(() => {
     if (currentAuthState.isAuthenticated) {
       const offset = currentState.currentPage * currentState.limit;
+
       apiService
         .get(
           `/employee/profiles?start=${offset}&limit=${currentState.limit}&filter=`
@@ -79,6 +78,9 @@ const EmployeeContext = ({ children }: EmployeeContextProps) => {
             type: EmployeeAction.TOTAL_PAGE,
             payload: Math.ceil(response.data.entity.count / currentState.limit),
           });
+          console.log(
+            Math.ceil(response.data.entity.count / currentState.limit)
+          );
         })
         .catch((error) => {
           console.error("Error fetching employee profiles:", error);
@@ -86,8 +88,10 @@ const EmployeeContext = ({ children }: EmployeeContextProps) => {
     }
   }, [currentState.currentPage, currentAuthState.isAuthenticated]);
 
-  console.log(currentState.employee);
-
+  console.log(currentAuthState.isAuthenticated);
+  console.log(currentState.currentPage, currentState.employee);
+  console.log(localStorage.getItem("accesToken"));
+  
   return (
     <EmployeeContextProvider.Provider value={{ currentState, dispatch }}>
       {children}

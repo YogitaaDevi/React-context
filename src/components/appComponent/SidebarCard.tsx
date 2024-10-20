@@ -23,7 +23,10 @@ const SidebarCard = ({ option }: SidebarCardProps) => {
   const handleOption = (name: string) => {
     if (name === EMPLOYEE_LOOKUP_MENU) navigate(EMPLOYEE);
     if (name === DASHBOARD_MENU) navigate(DASHBOARD);
-    if (name === LOGOUT) dispatch({ type: UserAction.UNAUTHENTICATE_USER });
+    if (name === LOGOUT) {
+      dispatch({ type: UserAction.UNAUTHENTICATE_USER });
+      localStorage.removeItem("accessToken");
+    }
   };
 
   return (
