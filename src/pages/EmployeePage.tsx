@@ -17,8 +17,6 @@ const EmployeePage = () => {
     }
   };
 
-  console.log(currentState.currentPage, currentState.totalPage);
-
   return (
     <InfiniteScroll
       dataLength={currentState.employee.length}

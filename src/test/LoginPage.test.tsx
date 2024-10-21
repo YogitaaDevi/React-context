@@ -9,13 +9,15 @@ import { UserAction } from "../enum/userAction";
 
 jest.mock("../services/apiService");
 
+const mockNavigate = jest.fn();
+
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
-  useNavigate: () => jest.fn(),
+  useNavigate: () => mockNavigate,
 }));
 
 const mockAuthValue = {
-  currentState: {
+  currentAuthState: {
     isAuthenticated: false,
   },
   dispatch: jest.fn(),
@@ -112,22 +114,19 @@ describe("LoginPage", () => {
     );
   });
 
-  test("submits form with valid data and navigates to dashboard", async () => {
-    const mockNavigate = jest.fn();
-    const mockDispatch = jest.fn();
-    (apiService.post as jest.Mock).mockResolvedValue({
-      data: { entity: { accessToken: "mockToken" } },
-    });
+  test("displaying whether to show password or not", async () => {
+    const passwordInput = screen.getByPlaceholderText(/Enter your password/i);
+    expect(passwordInput).toHaveAttribute("type", "password");
+    fireEvent.click(screen.getByLabelText(/Show password/i));
+    expect(passwordInput).toHaveAttribute("type", "text");
+  });
 
-    render(
-      <AuthContextProvider.Provider
-        value={{ ...mockAuthValue, dispatch: mockDispatch }}
-      >
-        <BrowserRouter>
-          <LoginPage />
-        </BrowserRouter>
-      </AuthContextProvider.Provider>
-    );
+  test("submits form with valid data and navigates to dashboard", async () => {
+    const mockResponse = { data: { entity: { accessToken: "mockToken" } } };
+
+    (apiService.post as jest.Mock).mockResolvedValue(mockResponse);
+    jest.spyOn(window.localStorage.__proto__, "setItem");
+
     fireEvent.change(screen.getByPlaceholderText(/Enter your username/i), {
       target: { value: "yogitaadevi.ravishankar@ideas2it.com" },
     });
@@ -135,19 +134,24 @@ describe("LoginPage", () => {
       target: { value: "Yogiravi@2003" },
     });
     fireEvent.click(screen.getByRole("button", { name: /Login/i }));
-
     await waitFor(() => {
       expect(apiService.post).toHaveBeenCalledWith(AUTH, {
         username: "yogitaadevi.ravishankar@ideas2it.com",
         password: "Yogiravi@2003",
       });
-      expect(mockDispatch).toHaveBeenCalledWith({
+
+      expect(localStorage.setItem).toHaveBeenCalledWith(
+        "accessToken",
+        "mockToken"
+      );
+
+      expect(mockAuthValue.dispatch).toHaveBeenCalledWith({
         type: UserAction.AUTHENTICATE_USER,
       });
+
       expect(mockNavigate).toHaveBeenCalledWith(DASHBOARD, { replace: true });
     });
   });
-
   afterEach(() => {
     jest.clearAllMocks();
   });

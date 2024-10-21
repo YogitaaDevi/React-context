@@ -55,6 +55,7 @@ const LoginPage = () => {
       .then((response) => {
         const accessToken = response.data.entity.accessToken;
         localStorage.setItem("accessToken", accessToken);
+
         dispatch({ type: UserAction.AUTHENTICATE_USER });
         navigate(DASHBOARD, { replace: true });
       })
@@ -110,9 +111,10 @@ const LoginPage = () => {
                   <Field
                     type="checkbox"
                     name="showPassword"
+                    id="showPassword"
                     onClick={() => setShowPassword((prev) => !prev)}
                   />
-                  Show Password
+                  <label htmlFor="showPassword">Show Password</label>
                 </div>
                 <a href="/">Forget Password?</a>
               </div>
